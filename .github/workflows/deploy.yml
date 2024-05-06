@@ -1,0 +1,42 @@
+name: Deploy Puzzle front-end
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
+    - name: Build Docker image
+      run: docker build -t byeoung/puzzle-front .
+
+    - name: Log in to Docker hub
+      uses: docker/login-action@v3
+      with: 
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Push Docker image to Docker Hub
+      run: docker push byeoung/puzzle-front
+
+    - name: Deploy to AWS EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          docker pull byeoung/puzzle-front
+          docker stop puzzle || true
+          docker rm puzzle || true
+          docker run -d --name puzzle -p 80:80 byeoung/puzzle-front
