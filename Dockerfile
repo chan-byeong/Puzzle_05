@@ -12,16 +12,12 @@ RUN yarn build
 
 FROM nginx:alpine
 
-# COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 # RUN rm /etc/nginx/conf.d/default.conf
-RUN rm -rf /etc/nginx/sites-enabled/default
+RUN rm /etc/nginx/conf.d/default.conf
 
-COPY nginx/nginx.conf /etc/nginx/conf.d 
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN echo ls -a
-
-COPY --from=build /app/dist dist/
-
-EXPOSE 3000
+EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
