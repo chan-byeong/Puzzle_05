@@ -26,6 +26,23 @@ export const MenuItem = styled.div`
   cursor: pointer;
 `;
 
+export const MenuImg = styled.div`
+  width: 51px;
+  height: 51px;
+  border-radius: 50%;
+  background-color: #d9d9d95e;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & > img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+`;
+
 export const Title = styled.div`
   display: flex;
   width: 100%;

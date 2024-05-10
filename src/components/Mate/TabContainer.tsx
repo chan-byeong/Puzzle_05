@@ -1,21 +1,24 @@
-import { useState } from "react";
 import { css } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
 
+//TODO: 라우팅 제거 시 탭 리스트 수정
 const TAB_LIST = [
-  ["룸메", "/mate/room-mate"],
-  ["밥메", "/mate/bob-mate"],
-  ["언어교환", "/mate/lang-exchange"],
-  ["기타", "/mate/others"],
+  ["전체", "/community"],
+  ["룸메 찾기", "/community/mate"],
+  ["공동구매", "/community/share"],
+  ["자유게시판", "/reservation"],
+  ["정보게시판", "/reservation"],
+  ["언어교환", "/dhlqkr"],
+  ["건의사항", "/rjsdml"],
 ];
 
-function TabContainer() {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(0);
+interface TabContainerProps {
+  activeTab: number;
+  setActiveTab: React.Dispatch<React.SetStateAction<number>>;
+}
 
-  const handleTabClick = (index: number, path: string) => {
+function TabContainer({ activeTab, setActiveTab }: TabContainerProps) {
+  const handleTabClick = (index: number) => {
     setActiveTab(index);
-    navigate(path);
   };
 
   return (
@@ -24,7 +27,7 @@ function TabContainer() {
         <div
           key={index}
           css={styles.tabItem(activeTab === index)}
-          onClick={() => handleTabClick(index, tab[1])}
+          onClick={() => handleTabClick(index)}
         >
           {tab[0]}
         </div>
@@ -38,21 +41,33 @@ export default TabContainer;
 
 const styles = {
   tabContainer: css`
-    position: relative;
+    /* width: 100%; */
+    /* max-width: 358px; */
+    position: absolute;
+    left: 0;
+    top: 97px;
     display: flex;
-    width: 100%;
-    max-width: 358px;
     align-items: center;
+    overflow-x: scroll;
+
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    ::-webkit-scrollbar {
+      display: none;
+    }
 
     border-bottom: 1px solid #d9d9d9;
   `,
   tabItem: (isActive: boolean) => css`
-    width: 25%;
-    padding: 12px 0;
+    /* width: 25%; */
+    padding: 12px 18px;
+
+    flex-shrink: 0;
     text-align: center;
     font-weight: 700;
     font-size: 16px;
     color: ${isActive ? "black" : "#D9D9D9"};
+    border-bottom: ${isActive ? "1px solid #00dd9b" : ""};
     cursor: pointer;
   `,
   indicator: (activeIndex: number) => css`

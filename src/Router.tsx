@@ -1,7 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
+import { Outlet, createBrowserRouter } from "react-router-dom";
 import Root from "./Pages/Root";
 import HomePage from "./Pages/HomePage";
 import MateHome from "./components/Mate/MateHome";
+import WriteMate from "./components/Mate/WriteMate";
 
 const router = createBrowserRouter([
   {
@@ -13,23 +14,27 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/mate",
-        element: <MateHome />,
+        path: "/community",
+        element: <Outlet />,
         children: [
           {
-            path: "/mate/room-mate",
-            element: <h1>roommate</h1>,
+            path: "/community",
+            element: <MateHome />,
           },
           {
-            path: "/mate/bob-mate",
+            path: "/community/mate-post",
+            element: <WriteMate />,
+          },
+          {
+            path: "/community/bob-mate",
             element: <h1>BOB MATE</h1>,
           },
           {
-            path: "/mate/lang-exchange",
+            path: "/community/lang-exchange",
             element: <h1>Language Exchange</h1>,
           },
           {
-            path: "/mate/others",
+            path: "/community/others",
             element: <h1>Others</h1>,
           },
         ],
