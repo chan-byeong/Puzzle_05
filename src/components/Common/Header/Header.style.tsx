@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 
 import kull_logo from "./images/kull-icon.png";
-import user_icon from "./images/user-icon.png";
 import message from "./images/message-circle.png";
 import back_icon from "./images/chevron-left.png";
 import search_icon from "./images/search.png";
+import x_icon from "./images/x.png";
 
 export const HeaderBox = styled("div")`
   height: 50px;
@@ -36,12 +36,6 @@ export const Message = styled(ImgBox)`
   margin-right: 15px;
 `;
 
-export const User = styled(ImgBox)`
-  width: 30px;
-  height: 30px;
-  background-image: url(${user_icon});
-`;
-
 export const Back = styled(ImgBox)`
   width: 24px;
   height: 24px;
@@ -54,10 +48,24 @@ export const SearchIcon = styled(ImgBox)`
   background-image: url(${search_icon});
 `;
 
+export const XIcon = styled(ImgBox)`
+  width: 24px;
+  height: 24px;
+  background-image: url(${x_icon});
+`;
+
 export const Title = styled.span`
   color: #3a3a3a;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+`;
+
+export const MiddleTxt = styled.span`
+  color: #c6c6c6;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 18px; /* 128.571% */
 `;
