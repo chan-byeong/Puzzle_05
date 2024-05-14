@@ -5,7 +5,7 @@ import TabContainer from "./TabContainer";
 import RoomMate from "./RoomMate";
 
 function MateHome() {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
 
   const componentRouter = (activeTab: number) => {
     if (activeTab === 1) return <RoomMate />;

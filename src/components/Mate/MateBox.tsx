@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import user_icon from "./images/user-icon.png";
 
 function MateBox() {
-  //TODO: 실제 데이터 로드
+  //TODO: 데이터 prop으로 받음
 
   return (
     <div css={styles.container}>

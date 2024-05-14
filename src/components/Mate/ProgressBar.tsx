@@ -3,13 +3,17 @@ import { css } from "@emotion/react";
 interface ProgressBarProps {
   step: number;
   TOTAL: number;
+  customWidth?: string;
+  customTop?: string;
+  customLeft?: string;
+  customHeigth?: string;
 }
 
-function ProgressBar({ step, TOTAL }: ProgressBarProps) {
+function ProgressBar({ step, TOTAL, customWidth, customLeft, customTop, customHeigth }: ProgressBarProps) {
   return (
-    <div css={styles.container}>
-      <div css={styles.bar(step, TOTAL)} />
-      <label css={styles.label(step, TOTAL)}>{(step / TOTAL) * 100}</label>
+    <div css={styles.container(customWidth, customTop, customLeft, customHeigth)}>
+      <div css={styles.bar(step, TOTAL, customHeigth)} />
+      {/* <label css={styles.label(step, TOTAL)}>{(step / TOTAL) * 100}</label> */}
     </div>
   );
 }
@@ -17,19 +21,23 @@ function ProgressBar({ step, TOTAL }: ProgressBarProps) {
 export default ProgressBar;
 
 const styles = {
-  container: css`
-    width: 100%;
-    height: 5px;
+  container: (customWidth?: string, customTop?: string, customLeft?: string, customHeigth?: string) => css`
+    width: ${customWidth ? `${customWidth}px` : "100%"};
+    height: ${customHeigth ? `${customHeigth}px` : "5px"};
     background-color: #d9d9d9;
 
     position: absolute;
-    left: 0;
+    left: ${customLeft ? `${customLeft}px` : "0"};
+    top: ${customTop ? `${customTop}px` : "0"};
+
+    border-radius: 5px;
   `,
-  bar: (step: number, TOTAL: number) => css`
+  bar: (step: number, TOTAL: number, customHeigth?: string) => css`
     width: calc(${(step / TOTAL) * 100}%);
-    height: 5px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    height: ${customHeigth ? `${customHeigth}px` : "5px"};
+    /* border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; */
+    border-radius: 5px;
     background-color: #00dd9b;
 
     position: absolute;
