@@ -5,9 +5,12 @@ import { css } from "@emotion/react";
 import { SubmitBtn } from "./MateForm.style";
 import MateInfoCard from "./MateInfoCard";
 import DetailHeader from "../Common/Header/DetailHeader";
+import Modal from "../Common/Modal";
 
 function MateDetail() {
   const [view, setVeiw] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+
   //TODO: uid로 글 정보 단건 조회
   const { uid } = useParams();
   console.log(uid);
@@ -15,29 +18,33 @@ function MateDetail() {
   const cards = [<MateInfoCard first />, <MateInfoCard />, <MateInfoCard />, <MateInfoCard />];
 
   return (
-    <div>
-      <DetailHeader />
-      <div
-        css={css`
-          position: relative;
-        `}
-      >
-        {cards.map((Card, index) => (
-          <div css={styles.wrapper(index, view === index, index < view, view)} onClick={() => setVeiw(index)}>
-            {Card}
-            <div className="shadow" />
-          </div>
-        ))}
+    <>
+      <div>
+        <DetailHeader />
+        <div
+          css={css`
+            position: relative;
+          `}
+        >
+          {cards.map((Card, index) => (
+            <div css={styles.wrapper(index, view === index, index < view, view)} onClick={() => setVeiw(index)}>
+              {Card}
+              <div className="shadow" />
+            </div>
+          ))}
+        </div>
+        <SubmitBtn
+          css={css`
+            position: absolute;
+            bottom: 40px;
+          `}
+          onClick={() => setModalOpen(true)}
+        >
+          메이트 신청하기
+        </SubmitBtn>
       </div>
-      <SubmitBtn
-        css={css`
-          position: absolute;
-          bottom: 40px;
-        `}
-      >
-        메이트 신청하기
-      </SubmitBtn>
-    </div>
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} />
+    </>
   );
 }
 
