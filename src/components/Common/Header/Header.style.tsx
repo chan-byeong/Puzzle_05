@@ -5,6 +5,8 @@ import message from "./images/message-circle.png";
 import back_icon from "./images/chevron-left.png";
 import search_icon from "./images/search.png";
 import x_icon from "./images/x.png";
+import user from "./images/user-icon.png";
+import threedot from "./images/more-vertical.png";
 
 export const HeaderBox = styled("div")`
   height: 50px;
@@ -48,10 +50,22 @@ export const SearchIcon = styled(ImgBox)`
   background-image: url(${search_icon});
 `;
 
+export const User = styled(ImgBox)`
+  width: 30px;
+  height: 30px;
+  background-image: url(${user});
+`;
+
 export const XIcon = styled(ImgBox)`
   width: 24px;
   height: 24px;
   background-image: url(${x_icon});
+`;
+
+export const MoreMenu = styled(ImgBox)`
+  width: 24px;
+  height: 24px;
+  background-image: url(${threedot});
 `;
 
 export const Title = styled.span`
