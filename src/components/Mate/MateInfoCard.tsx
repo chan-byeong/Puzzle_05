@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { UserCard } from "../Common/UserCard";
 
 import user from "./images/big_user.png";
 import ProgressBar from "./ProgressBar";
@@ -133,7 +132,6 @@ const s = {
   `,
 
   label: css`
-    /* width: calc(${(step / TOTAL) * 100}%); */
     position: absolute;
     left: 153px;
     top: 67px;
