@@ -6,6 +6,7 @@ import WriteMate from "./components/Mate/WriteMate";
 import MateDetail from "./components/Mate/MateDetail";
 import RoomMate from "./components/Mate/RoomMate";
 import Announcement from "./components/Announcement/Announcement";
+import Share from "./components/Share/Share";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/community/share",
-                element: <h1>Share</h1>,
+                element: <Share />,
               },
               {
                 path: "/community/announcement",
