@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/community/all",
-                element: <RoomMate />,
+                element: <h1>ALL</h1>,
               },
               {
                 path: "/community/mate",
