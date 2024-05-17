@@ -2,7 +2,7 @@ import React from "react";
 import { css } from "@emotion/react";
 
 import MenuList from "./MenuList";
-import Announcement from "./Announcement";
+import AnnouncementHome from "./AnnouncementHome";
 import Diets from "./Diets";
 
 function Home() {
@@ -11,7 +11,7 @@ function Home() {
       <MenuList />
       {/* prettier-ignore */}
       <div css={css`height: 40px;`}></div>
-      <Announcement />
+      <AnnouncementHome />
       {/* prettier-ignore */}
       <div css={css`height: 40px;`}></div>
       <Diets />

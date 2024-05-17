@@ -8,8 +8,8 @@ const TAB_LIST = [
   ["룸메 찾기", "/community/mate"],
   ["공동구매", "/community/share"],
   ["자유게시판", "/reservation"],
-  ["정보게시판", "/reservation"],
-  ["언어교환", "/dhlqkr"],
+  ["언어교환", "/reservation"],
+  ["공지사항", "/community/announcement"],
   ["건의사항", "/rjsdml"],
 ];
 
