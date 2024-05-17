@@ -106,7 +106,7 @@ const styles = {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: ${window.innerHeight < 844 ? "844px" : "100vh"};
 
     background-color: #00000014;
     z-index: 8;
