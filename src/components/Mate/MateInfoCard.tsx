@@ -42,7 +42,7 @@ function MateInfoCard({ first }: MateInfoCardProps) {
 
   const infoPage = (
     <div css={s.container}>
-      <div css={s.title}>생활 패턴</div>
+      <div css={s.title_green}>생활 패턴</div>
       <div css={s.detailsWrapper}>
         <p css={s.details}>
           <span className="left">기상시간</span>
@@ -151,6 +151,15 @@ const s = {
     margin-top: 20px;
   `,
 
+  title_green: css`
+    color: #00dd9b;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+
+    /* margin-top: 20px; */
+  `,
+
   detailsWrapper: css`
     /* width: 200px; */
     height: 180px;
@@ -189,7 +198,7 @@ const s = {
 
     & > .right {
       color: #3a3a3a;
-      font-size: 15px;
+      font-size: 20px;
       font-weight: 700;
       line-height: 24px; /* 160% */
     }
