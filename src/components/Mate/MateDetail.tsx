@@ -24,6 +24,8 @@ function MateDetail() {
         <div
           css={css`
             position: relative;
+            display: flex;
+            justify-content: center;
           `}
         >
           {cards.map((Card, index) => (

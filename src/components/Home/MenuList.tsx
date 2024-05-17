@@ -12,7 +12,7 @@ import free from "./images/free_star.png";
 import question from "./images/question_icon.png";
 
 const MENU_LIST = [
-  ["전체", "/community"],
+  ["전체", "/community/all"],
   ["룸메 찾기", "/community/mate"],
   ["공동구매", "/community/share"],
   ["언어교환", "/dhlqkr"],

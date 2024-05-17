@@ -1,22 +1,17 @@
 import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
 import RouteHeader from "../Common/Header/RouteHeader";
 import TabContainer from "./TabContainer";
-import RoomMate from "./RoomMate";
 
 function MateHome() {
   const [activeTab, setActiveTab] = useState(1);
-
-  const componentRouter = (activeTab: number) => {
-    if (activeTab === 1) return <RoomMate />;
-  };
 
   return (
     <>
       <RouteHeader />
       <TabContainer activeTab={activeTab} setActiveTab={setActiveTab} />
-      {/* TODO: activeTab 별로 다른 컴포넌트 렌더링 */}
-      {componentRouter(activeTab)}
+      <Outlet />
     </>
   );
 }

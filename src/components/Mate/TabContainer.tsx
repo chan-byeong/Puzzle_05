@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 import { css } from "@emotion/react";
 
 //TODO: 라우팅 제거 시 탭 리스트 수정
 const TAB_LIST = [
-  ["전체", "/community"],
+  ["전체", "/community/all"],
   ["룸메 찾기", "/community/mate"],
   ["공동구매", "/community/share"],
   ["자유게시판", "/reservation"],
@@ -17,6 +19,7 @@ interface TabContainerProps {
 }
 
 function TabContainer({ activeTab, setActiveTab }: TabContainerProps) {
+  const nav = useNavigate();
   const handleTabClick = (index: number) => {
     setActiveTab(index);
   };
@@ -27,7 +30,10 @@ function TabContainer({ activeTab, setActiveTab }: TabContainerProps) {
         <div
           key={index}
           css={styles.tabItem(activeTab === index)}
-          onClick={() => handleTabClick(index)}
+          onClick={() => {
+            handleTabClick(index);
+            nav(tab[1]);
+          }}
         >
           {tab[0]}
         </div>
@@ -45,7 +51,7 @@ const styles = {
     /* max-width: 358px; */
     position: absolute;
     left: 0;
-    top: 97px;
+    top: 50px;
     display: flex;
     align-items: center;
     overflow-x: scroll;
