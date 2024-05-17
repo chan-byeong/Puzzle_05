@@ -1,15 +1,18 @@
 import { useForm, useController, SubmitHandler, FieldValues } from "react-hook-form";
 import { useState } from "react";
+import { css } from "@emotion/react";
 
 import * as F from "./MateForm.style";
 import DotSlider from "./DotSlider";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "../../hooks/axios";
 
+import left_arrow from "./images/chevron-left-w.png";
+
 type FormData = {
   age: string;
   contents: string;
-  day: string;
+  dayOfWeek: string;
   deliveryFood: number;
   familiarity: number;
   gameAndCall: number;
@@ -17,18 +20,15 @@ type FormData = {
   homeProtector: number;
   light: number;
   mbti: string;
-  noiseSense: number;
-  noisiness: number;
   personalTime: number;
-  showerEnd: string;
-  showerStart: string;
-  sleepEnd: string;
-  sleepStart: string;
+  showerEnd: number;
+  showerStart: number;
+  sleepEnd: number;
+  sleepStart: number;
   smoking: string;
-  snoring: string;
   title: string;
-  wakeUpEnd: string;
-  wakeUpStart: string;
+  wakeUpEnd: number;
+  wakeUpStart: number;
 };
 
 const MBTI = [
@@ -52,45 +52,43 @@ const MBTI = [
 const WEEK = ["월", "화", "수", "목", "금", "토", "일"];
 const ranges = ["하나", "두울", "세엣", "네엣", "다섯"];
 
-function MateForm() {
+interface MateFormProps {
+  step: number;
+  setStep: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function MateForm({ step, setStep }: MateFormProps) {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   // prettier-ignore
   const { register, handleSubmit, control , watch, setValue } = useForm();
-
-  // console.log("12");
-  // const mutation = usePostMateWritings();
-  // console.log("34");
-
-  const mutation = useMutation({ mutationFn: (data: FormData) => axiosInstance.post("/mate-posts", data) });
+  const mutation = useMutation({
+    mutationKey: ["mate-form"],
+    mutationFn: (data: FormData) => axiosInstance.post("/mate-posts", data),
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
     const formData: FormData = data as FormData; // FormData로 변환
     console.log(formData);
     console.log("onsubmit");
+    data.age = parseInt(data.age);
+    data.wakeUpStart = parseInt(data.wakeUpStart);
+    data.wakeUpEnd = parseInt(data.wakeUpEnd);
+    data.sleepStart = parseInt(data.sleepStart);
+    data.sleepEnd = parseInt(data.sleepEnd);
+    data.showerStart = parseInt(data.showerStart);
+    data.showerEnd = parseInt(data.showerEnd);
     mutation.mutate(formData);
+    console.log(mutation.data);
+    mutation.isSuccess && console.log("success");
+    mutation.isError && console.log("error");
   };
 
   const handleDayClick = (day: string) => {
     const updatedDays = selectedDays.includes(day) ? selectedDays.filter((d) => d !== day) : [...selectedDays, day];
 
     setSelectedDays(updatedDays);
-    setValue("day", updatedDays); // React Hook Form의 setValue를 사용하여 상태 업데이트
+    setValue("dayOfWeek", updatedDays); // React Hook Form의 setValue를 사용하여 상태 업데이트
   };
-
-  const { field: noiseSense } = useController({
-    name: "noiseSense",
-    control,
-  });
-
-  const { field: light } = useController({
-    name: "light",
-    control,
-  });
-
-  const { field: noisiness } = useController({
-    name: "noisiness",
-    control,
-  });
 
   const { field: personalTime } = useController({
     name: "personalTime",
@@ -119,20 +117,17 @@ function MateForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <F.FormSection>
+      {/* Step 1 */}
+      <F.FormSection step={step} index={1}>
         <F.TextSection>
           <label>제목</label>
           <input className="title" {...register("title", { required: true })} placeholder="이름" />
           {/* {errors.name && <p>이름은 필수 입력 사항입니다.</p>} */}
         </F.TextSection>
-
-        <F.TextSection>
-          <label>룸메에게 한 마디</label>
-          <textarea className="contents" {...register("contents")} placeholder="자기소개" />
-        </F.TextSection>
       </F.FormSection>
 
-      <F.FormSection>
+      {/* Step 2 */}
+      <F.FormSection step={step} index={2}>
         {/* 성별 */}
         <F.Question>
           <label>성별</label>
@@ -190,7 +185,8 @@ function MateForm() {
         </F.Question>
       </F.FormSection>
 
-      <F.FormSection>
+      {/* Step 3 */}
+      <F.FormSection step={step} index={3}>
         {/* TODO: 시간 데이터 형식 설정해서 register 시켜야한다. */}
         {/* 기상시간  */}
         <F.Question>
@@ -235,7 +231,7 @@ function MateForm() {
                   handleDayClick(item);
                 }}
                 selected={selectedDays.includes(item)}
-                {...register("day")}
+                {...register("dayOfWeek")}
               >
                 {item}
               </F.WeekDays>
@@ -244,128 +240,147 @@ function MateForm() {
         </F.Question>
       </F.FormSection>
 
-      <F.FormSection>
-        {/* 코골이 */}
+      {/* Step 4 */}
+      <F.FormSection step={step} index={4}>
+        {/* 흡연 */}
         <F.Question>
-          <label>코골이</label>
+          <label>흡연</label>
           <div>
             <F.BinaryBtn
-              selected={watch("snoring") === "true"}
+              selected={watch("smoking") === "true"}
               onClick={(e) => {
                 e.preventDefault();
-                setValue("snoring", "true");
+                setValue("smoking", "true");
               }}
-              {...register("snoring")}
+              {...register("smoking")}
             >
               O
             </F.BinaryBtn>
             <F.BinaryBtn
-              selected={watch("snoring") === "false"}
+              selected={watch("smoking") === "false"}
               onClick={(e) => {
                 e.preventDefault();
-                setValue("snoring", "false");
+                setValue("smoking", "false");
               }}
-              {...register("snoring")}
+              {...register("smoking")}
             >
               X
             </F.BinaryBtn>
           </div>
         </F.Question>
 
-        {/* 소음 예민도 */}
         <F.Question>
-          <label>소음 예민도</label>
+          <label>배달 음식</label>
           <div className="slider">
-            <DotSlider ranges={ranges} value={noiseSense.value} setValue={noiseSense.onChange} />
-          </div>
-        </F.Question>
-
-        {/* 조명 예민도 */}
-        <F.Question>
-          <label>조명 예민도</label>
-          <div className="slider">
-            <DotSlider ranges={ranges} value={light.value} setValue={light.onChange} />
+            <DotSlider key="deliveryFood" ranges={ranges} value={deliveryFood.value} setValue={deliveryFood.onChange} />
           </div>
         </F.Question>
 
         <F.Question>
-          <label>시끄러운 정도</label>
-          <div className="slider" style={{ marginBottom: "20px" }}>
-            <DotSlider ranges={ranges} value={noisiness.value} setValue={noisiness.onChange} />
+          <label>게임 / 통화</label>
+          <div className="slider">
+            <DotSlider key="gameAndCall" ranges={ranges} value={gameAndCall.value} setValue={gameAndCall.onChange} />
+          </div>
+        </F.Question>
+
+        <F.Question>
+          <label>정리정돈</label>
+          <div className="slider">
+            <DotSlider key="personalTime" ranges={ranges} value={personalTime.value} setValue={personalTime.onChange} />
+          </div>
+        </F.Question>
+
+        <F.Question>
+          <label>청소</label>
+          <div className="slider">
+            <DotSlider key="familiarity" ranges={ranges} value={familiarity.value} setValue={familiarity.onChange} />
+          </div>
+        </F.Question>
+
+        <F.Question>
+          <label>벌레잡기</label>
+          <div className="slider">
+            <DotSlider
+              key="homeProtector"
+              ranges={ranges}
+              value={homeProtector.value}
+              setValue={homeProtector.onChange}
+            />
           </div>
         </F.Question>
       </F.FormSection>
 
-      {/* 흡연 */}
-      <F.Question>
-        <label>흡연</label>
-        <div>
-          <F.BinaryBtn
-            selected={watch("smoking") === "true"}
-            onClick={(e) => {
-              e.preventDefault();
-              setValue("smoking", "true");
-            }}
-            {...register("smoking")}
-          >
-            O
-          </F.BinaryBtn>
-          <F.BinaryBtn
-            selected={watch("smoking") === "false"}
-            onClick={(e) => {
-              e.preventDefault();
-              setValue("smoking", "false");
-            }}
-            {...register("smoking")}
-          >
-            X
-          </F.BinaryBtn>
-        </div>
-      </F.Question>
+      <F.FormSection step={step} index={5}>
+        <F.TextSection>
+          <label>룸메에게 한 마디</label>
+          <textarea className="contents" {...register("contents")} placeholder="자기소개" />
+        </F.TextSection>
+      </F.FormSection>
 
-      <F.Question>
-        <label>개인 시간 필요도</label>
-        <div className="slider">
-          <DotSlider key="personalTime" ranges={ranges} value={personalTime.value} setValue={personalTime.onChange} />
-        </div>
-      </F.Question>
-
-      <F.Question>
-        <label>친해질 정도</label>
-        <div className="slider">
-          <DotSlider key="familiarity" ranges={ranges} value={familiarity.value} setValue={familiarity.onChange} />
-        </div>
-      </F.Question>
-
-      <F.Question>
-        <label>배달 음식</label>
-        <div className="slider">
-          <DotSlider key="deliveryFood" ranges={ranges} value={deliveryFood.value} setValue={deliveryFood.onChange} />
-        </div>
-      </F.Question>
-
-      <F.Question>
-        <label>집에 있는 시간</label>
-        <div className="slider">
-          <DotSlider
-            key="homeProtector"
-            ranges={ranges}
-            value={homeProtector.value}
-            setValue={homeProtector.onChange}
-          />
-        </div>
-      </F.Question>
-
-      <F.Question>
-        <label>게임 / 통화</label>
-        <div className="slider">
-          <DotSlider key="gameAndCall" ranges={ranges} value={gameAndCall.value} setValue={gameAndCall.onChange} />
-        </div>
-      </F.Question>
-
-      <F.SubmitBtn type="submit">작성완료</F.SubmitBtn>
+      <div css={styles.container}>
+        <button css={styles.back(step)} disabled={step === 1} onClick={() => setStep((pre) => pre - 1)}></button>
+        {step !== 5 && (
+          <div css={styles.next} onClick={() => setStep((pre) => pre + 1)}>
+            확인
+          </div>
+        )}
+        {step === 5 && (
+          <button type="submit" css={styles.next}>
+            작성완료
+          </button>
+        )}
+      </div>
     </form>
   );
 }
 
 export default MateForm;
+
+const styles = {
+  container: css`
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+
+    position: fixed;
+    bottom: 35px;
+  `,
+
+  back: (step: number) => css`
+    display: flex;
+    width: 16%;
+    height: 49px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    background: ${step === 1 ? "#B7E5D7" : "#00dd9b"};
+    box-shadow: 0px 0px 15px 0px rgba(96, 96, 96, 0.08);
+
+    &::before {
+      content: "";
+      width: 30px;
+      height: 30px;
+      background-image: url(${left_arrow});
+      background-position: center;
+      background-size: contain;
+    }
+  `,
+
+  next: css`
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    background: var(--Mint, #00dd9b);
+    box-shadow: 0px 0px 15px 0px rgba(96, 96, 96, 0.08);
+
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+
+    border: none;
+  `,
+};
