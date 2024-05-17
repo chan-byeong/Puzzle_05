@@ -61,7 +61,7 @@ export const TextSection = styled.div`
   flex-shrink: 0;
   & > label {
     color: var(--Black, #3a3a3a);
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
   }
 
@@ -77,7 +77,7 @@ export const TextSection = styled.div`
     font-size: 15px;
     font-weight: 500;
 
-    margin-top: 5px;
+    margin-top: 10px;
     &:focus {
       outline: none;
     }
@@ -103,7 +103,7 @@ export const TextSection = styled.div`
 `;
 
 export const Question = styled.div`
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
   max-width: 430px;
 
@@ -111,11 +111,21 @@ export const Question = styled.div`
 
   & > label {
     color: var(--Black, #3a3a3a);
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
   }
+
+  & > .star {
+    &::after {
+      content: "*";
+      color: var(--Mint, #00dd9b);
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
   & > div {
-    margin-top: 5px;
+    margin-top: 10px;
     color: #3a3a3a;
     font-size: 15px;
   }
@@ -127,7 +137,7 @@ export const Question = styled.div`
   }
 
   & > .slider {
-    margin-bottom: 42px;
+    margin-bottom: 10px;
   }
 `;
 

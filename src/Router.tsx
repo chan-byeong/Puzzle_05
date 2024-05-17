@@ -5,6 +5,7 @@ import MateHome from "./components/Mate/MateHome";
 import WriteMate from "./components/Mate/WriteMate";
 import MateDetail from "./components/Mate/MateDetail";
 import RoomMate from "./components/Mate/RoomMate";
+import Announcement from "./components/Announcement/Announcement";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
                 path: "/community/share",
                 element: <h1>Share</h1>,
               },
+              {
+                path: "/community/announcement",
+                element: <Announcement />,
+              },
             ],
           },
           // MATEHOME 헤더가 아닌 다른 헤더 사용할 경우 아래로 라우팅
@@ -47,7 +52,7 @@ const router = createBrowserRouter([
             element: <MateDetail />,
           },
           {
-            path: "/community/others",
+            path: "/community/announcement/:aid",
             element: <h1>Others</h1>,
           },
         ],

@@ -12,7 +12,7 @@ function DotSlider({ ranges, value, setValue }: DotSliderProps) {
     <div css={styles.container}>
       {ranges.map((item, index) => (
         <>
-          <div key={index} css={styles.dot} onClick={() => setValue(index)}>
+          <div key={index} css={styles.dot(index, value)} onClick={() => setValue(index)}>
             {typeof item === "number" && <label css={styles.label(value === index)}>{item}</label>}
           </div>
         </>
@@ -53,12 +53,12 @@ const styles = {
     z-index: 1;
   `,
 
-  dot: css`
+  dot: (index: number, value: number) => css`
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    border: 1px solid #00dd9b;
-    background-color: #fff;
+    /* border: 1px solid #00dd9b; */
+    background-color: ${index <= value ? "#00dd9b" : "#d9d9d9"};
 
     position: relative;
 
@@ -68,7 +68,7 @@ const styles = {
   label: (selected: boolean) => css`
     width: 50px;
     display: ${selected ? "inline" : "none"};
-    color: var(--Grey, #7b7b7b);
+    color: #00dd9b;
     font-size: 13px;
     font-weight: 600;
 
@@ -77,7 +77,7 @@ const styles = {
   `,
 
   text: css`
-    color: var(--Grey, #7b7b7b);
+    color: #00dd9b;
     font-size: 13px;
     font-weight: 600;
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import * as H from "./Home.style";
 
-function Announcement() {
+function AnnouncementHome() {
   return (
     <>
       <H.Title>
@@ -18,4 +18,4 @@ function Announcement() {
   );
 }
 
-export default Announcement;
+export default AnnouncementHome;
