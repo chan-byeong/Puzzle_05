@@ -51,6 +51,7 @@ const MBTI = [
 ];
 const WEEK = ["월", "화", "수", "목", "금", "토", "일"];
 const ranges = ["하나", "두울", "세엣", "네엣", "다섯"];
+// const delivery = [""]
 
 interface MateFormProps {
   step: number;
@@ -121,7 +122,7 @@ function MateForm({ step, setStep }: MateFormProps) {
       <F.FormSection step={step} index={1}>
         <F.TextSection>
           <label>제목</label>
-          <input className="title" {...register("title", { required: true })} placeholder="이름" />
+          <input className="title" {...register("title", { required: true })} placeholder="제목을 입력해주세요" />
           {/* {errors.name && <p>이름은 필수 입력 사항입니다.</p>} */}
         </F.TextSection>
       </F.FormSection>
@@ -130,7 +131,7 @@ function MateForm({ step, setStep }: MateFormProps) {
       <F.FormSection step={step} index={2}>
         {/* 성별 */}
         <F.Question>
-          <label>성별</label>
+          <label className="star">성별</label>
           <div>
             <F.BinaryBtn
               type="button"
@@ -158,7 +159,7 @@ function MateForm({ step, setStep }: MateFormProps) {
 
         {/* 나이 */}
         <F.Question>
-          <label>나이</label>
+          <label className="star">나이</label>
           <div>
             만&nbsp; <F.NumberInput {...register("age", { required: true })} placeholder="20" maxLength={2} /> &nbsp;세
           </div>
@@ -190,7 +191,7 @@ function MateForm({ step, setStep }: MateFormProps) {
         {/* TODO: 시간 데이터 형식 설정해서 register 시켜야한다. */}
         {/* 기상시간  */}
         <F.Question>
-          <label>기상시간</label>
+          <label className="star">기상시간</label>
           <div>
             <F.NumberInput placeholder="10" maxLength={2} {...register("wakeUpStart", { required: true })} />
             &nbsp;&nbsp;~&nbsp;&nbsp;
@@ -200,7 +201,7 @@ function MateForm({ step, setStep }: MateFormProps) {
         </F.Question>
 
         <F.Question>
-          <label>취침시간</label>
+          <label className="star">취침시간</label>
           <div>
             <F.NumberInput placeholder="2" maxLength={2} {...register("sleepStart", { required: true })} />
             &nbsp;&nbsp;~&nbsp;&nbsp;
@@ -210,7 +211,7 @@ function MateForm({ step, setStep }: MateFormProps) {
         </F.Question>
 
         <F.Question>
-          <label>샤워시간</label>
+          <label className="star">샤워시간</label>
           <div>
             <F.NumberInput placeholder="10" maxLength={2} {...register("showerStart", { required: true })} />
             &nbsp;&nbsp;~&nbsp;&nbsp;
@@ -221,7 +222,7 @@ function MateForm({ step, setStep }: MateFormProps) {
 
         {/* TODO: 중복선택 */}
         <F.Question>
-          <label>거주요일</label>
+          <label className="star">거주요일</label>
           <div className="mbti">
             {WEEK.map((item, index) => (
               <F.WeekDays
@@ -244,7 +245,7 @@ function MateForm({ step, setStep }: MateFormProps) {
       <F.FormSection step={step} index={4}>
         {/* 흡연 */}
         <F.Question>
-          <label>흡연</label>
+          <label className="star">흡연</label>
           <div>
             <F.BinaryBtn
               selected={watch("smoking") === "true"}
@@ -270,35 +271,35 @@ function MateForm({ step, setStep }: MateFormProps) {
         </F.Question>
 
         <F.Question>
-          <label>배달 음식</label>
+          <label className="star">배달 음식</label>
           <div className="slider">
             <DotSlider key="deliveryFood" ranges={ranges} value={deliveryFood.value} setValue={deliveryFood.onChange} />
           </div>
         </F.Question>
 
         <F.Question>
-          <label>게임 / 통화</label>
+          <label className="star">게임 / 통화</label>
           <div className="slider">
             <DotSlider key="gameAndCall" ranges={ranges} value={gameAndCall.value} setValue={gameAndCall.onChange} />
           </div>
         </F.Question>
 
         <F.Question>
-          <label>정리정돈</label>
+          <label className="star">정리정돈</label>
           <div className="slider">
             <DotSlider key="personalTime" ranges={ranges} value={personalTime.value} setValue={personalTime.onChange} />
           </div>
         </F.Question>
 
         <F.Question>
-          <label>청소</label>
+          <label className="star">청소</label>
           <div className="slider">
             <DotSlider key="familiarity" ranges={ranges} value={familiarity.value} setValue={familiarity.onChange} />
           </div>
         </F.Question>
 
         <F.Question>
-          <label>벌레잡기</label>
+          <label className="star">벌레잡기</label>
           <div className="slider">
             <DotSlider
               key="homeProtector"
