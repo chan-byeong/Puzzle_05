@@ -42,7 +42,7 @@ export default PlusBtn;
 
 const styles = {
   plus_btn: css`
-    position: absolute;
+    position: fixed;
     bottom: 35px;
     right: 16px;
 
@@ -67,9 +67,9 @@ const styles = {
     }
   `,
   modal: css`
-    position: absolute;
-    bottom: 27px;
-    right: 71px;
+    position: fixed;
+    bottom: 25px;
+    right: 70px;
 
     width: 118px;
     height: 70px;

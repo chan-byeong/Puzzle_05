@@ -19,7 +19,7 @@ function RoomMate() {
       `}
     >
       <Filtering />
-      <div onClick={() => nav(`mate/${1}`)}>
+      <div onClick={() => nav(`${1}`)}>
         <MateBox />
       </div>
       <MateBox />

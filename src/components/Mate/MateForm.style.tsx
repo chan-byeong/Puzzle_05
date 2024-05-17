@@ -51,7 +51,7 @@ export const WeekDays = styled(Btn)`
 `;
 
 export const Mbti = styled(Btn)`
-  width: 82px;
+  width: 23%;
   height: 48px;
 `;
 
@@ -83,6 +83,10 @@ export const TextSection = styled.div`
     }
   }
 
+  & > textarea {
+    height: 165px;
+  }
+
   & > input::placeholder,
   textarea::placeholder {
     color: #a0a0a0;
@@ -100,6 +104,10 @@ export const TextSection = styled.div`
 
 export const Question = styled.div`
   margin-top: 20px;
+  width: 100%;
+  max-width: 430px;
+
+  flex-shrink: 0;
 
   & > label {
     color: var(--Black, #3a3a3a);
@@ -123,15 +131,25 @@ export const Question = styled.div`
   }
 `;
 
-export const FormSection = styled.div`
-  /* height: calc(100vh - 200px);
-  width: 100%;
-  display: flex;
+export const FormSection = styled.div<{ step: number; index: number }>`
+  display: ${({ step, index }) => (step === index ? "flex" : "none")};
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 135px);
+  /* width: 100%; */
+  max-width: 430px;
+  padding: 50px 0;
+
+  transition: transform 0.5s ease;
+  transform: ${({ step, index }) => step !== index && "translateX(-200px)"};
+  /* width: 100%; */
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center; */
 
-  padding-bottom: 20px;
+  /* padding-bottom: 20px;
   position: relative;
   &::after {
     content: "";
@@ -142,13 +160,14 @@ export const FormSection = styled.div`
     background-color: #a0a0a0;
     bottom: 0;
     left: -16px;
-  }
+  } */
 `;
 
 export const SubmitBtn = styled.button`
   display: flex;
-  width: 358px;
-  padding: 15px 128px;
+  width: 90%;
+  height: 49px;
+  /* padding: 15px 128px; */
   justify-content: center;
   align-items: center;
 
@@ -160,7 +179,8 @@ export const SubmitBtn = styled.button`
   font-size: 16px;
   font-weight: 600;
 
-  margin-top: 48px;
+  /* margin-top: 48px;
+  margin-left: 71.5px; */
 
   border: none;
 `;
