@@ -2,6 +2,7 @@ import { useState } from "react";
 import { css } from "@emotion/react";
 
 import x from "./images/x.svg";
+import down_arrow from "./images/chevron-down.png";
 
 function Filtering() {
   const [filters, setfilters] = useState([]);
@@ -31,7 +32,7 @@ function Filtering() {
 
       <div css={styles.container}>
         {/* TODO: 화살표 추가 및 정렬 모달 추가 */}
-        <div css={styles.sorting}>최신순</div>
+        <div css={styles.sorting}>최신순&nbsp;</div>
         {/* prettier-ignore */}
         <div css={[styles.filter, css`padding: 0 16px;`]}>필터</div>
       </div>
@@ -68,6 +69,16 @@ const styles = {
     color: var(--Grey, #7b7b7b);
     font-size: 15px;
     font-weight: 600;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 24px;
+      height: 24px;
+      background-image: url(${down_arrow});
+      background-size: contain;
+      background-position: center;
+    }
   `,
 
   filter: css`

@@ -1,5 +1,4 @@
 import React from "react";
-import { css } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 
 import MateBox from "./MateBox";
@@ -13,11 +12,7 @@ function RoomMate() {
 
   // 메이트 박스 -> 해당 유저가 쓴 글에 대한 모든 정보 전달 -> 클릭 시 상세 페이지로 라우팅
   return (
-    <div
-      css={css`
-        padding: 1px 0;
-      `}
-    >
+    <div>
       <Filtering />
       <div onClick={() => nav(`${1}`)}>
         <MateBox />
