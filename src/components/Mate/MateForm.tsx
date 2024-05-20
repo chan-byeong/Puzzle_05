@@ -5,7 +5,7 @@ import { css } from "@emotion/react";
 import * as F from "./MateForm.style";
 import DotSlider from "./DotSlider";
 import { useMutation } from "@tanstack/react-query";
-import axiosInstance from "../../hooks/axios";
+import request from "../../hooks/api";
 
 import left_arrow from "./images/chevron-left-w.png";
 
@@ -64,7 +64,7 @@ function MateForm({ step, setStep }: MateFormProps) {
   const { register, handleSubmit, control , watch, setValue } = useForm();
   const mutation = useMutation({
     mutationKey: ["mate-form"],
-    mutationFn: (data: FormData) => axiosInstance.post("/mate-posts", data),
+    mutationFn: (data: FormData) => request("/mate-posts", { method: "post", body: JSON.stringify(data) }),
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
