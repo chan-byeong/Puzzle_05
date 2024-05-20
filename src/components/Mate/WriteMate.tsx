@@ -13,7 +13,6 @@ function WriteMate() {
     <>
       <PostHeader />
       <ProgressBar step={step} TOTAL={TOTAL} />
-
       <MateForm step={step} setStep={setStep} />
     </>
   );

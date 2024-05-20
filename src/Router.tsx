@@ -1,12 +1,13 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import Root from "./Pages/Root";
 import HomePage from "./Pages/HomePage";
-import MateHome from "./components/Mate/MateHome";
+import BulletinPage from "./Pages/BulletinPage";
+import RoomMatePage from "./Pages/RoomMatePage";
+import SharePage from "./Pages/SharePage";
+import AnnouncementPage from "./Pages/AnnouncementPage";
+
 import WriteMate from "./components/Mate/WriteMate";
 import MateDetail from "./components/Mate/MateDetail";
-import RoomMate from "./components/Mate/RoomMate";
-import Announcement from "./components/Announcement/Announcement";
-import Share from "./components/Share/Share";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/community",
-            element: <MateHome />,
+            element: <BulletinPage />,
             children: [
               {
                 path: "/community/all",
@@ -31,15 +32,15 @@ const router = createBrowserRouter([
               },
               {
                 path: "/community/mate",
-                element: <RoomMate />,
+                element: <RoomMatePage />,
               },
               {
                 path: "/community/share",
-                element: <Share />,
+                element: <SharePage />,
               },
               {
                 path: "/community/announcement",
-                element: <Announcement />,
+                element: <AnnouncementPage />,
               },
             ],
           },
