@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { css } from "@emotion/react";
@@ -20,9 +21,17 @@ interface TabContainerProps {
 
 function TabContainer({ activeTab, setActiveTab }: TabContainerProps) {
   const nav = useNavigate();
+
   const handleTabClick = (index: number) => {
     setActiveTab(index);
   };
+
+  useEffect(() => {
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const index = TAB_LIST.findIndex((tab) => tab[1] === url.pathname);
+    setActiveTab(index);
+  }, []);
 
   return (
     <div css={styles.tabContainer}>
