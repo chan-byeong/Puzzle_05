@@ -1,6 +1,12 @@
 import { BASE_URL } from "./Constans";
 
-const request = async <T>(endpoint: string, options?: RequestInit) => {
+interface ResponseType<T> {
+  msg: string;
+  status: number;
+  data: T;
+}
+
+const request = async <T>(endpoint: string, options?: RequestInit): Promise<ResponseType<T>> => {
   const defaultOptions: RequestInit = {
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +22,7 @@ const request = async <T>(endpoint: string, options?: RequestInit) => {
     throw new Error(`Error occured ${response.status}, ${response.statusText}`);
   }
 
-  return response.json() as Promise<T>;
+  return response.json() as Promise<ResponseType<T>>;
 };
 
 export default request;
