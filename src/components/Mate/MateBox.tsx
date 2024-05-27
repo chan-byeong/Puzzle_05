@@ -2,20 +2,28 @@ import { css } from "@emotion/react";
 
 import user_icon from "./images/user-icon.png";
 
-function MateBox() {
+interface MateBoxProps {
+  matePostId: number;
+  title: string;
+  contents: string;
+  age: number;
+  gender: string;
+  grade: string;
+}
+
+function MateBox(props: MateBoxProps) {
   //TODO: 데이터 prop으로 받음
 
   return (
     <div css={styles.container}>
       <div css={styles.info}>
         <img src={user_icon} alt="profile" width={21} />
-        <p className="info">만 21세 | 여자 | 2학년</p>
+        <p className="info">
+          만 {props.age}세 | {props.gender} | {props.grade}
+        </p>
       </div>
-      <div css={styles.title}>레이크홀 룸메 구함</div>
-      <div css={styles.description}>
-        안녕하세요 2024학년도 1학기 레이크홀 룸메 구합니다. 예민하지 않고 깨끗합니다. 같이 즐거운 한 학기
-        보내요~~아아ㅏㅇㅇ아ㅏㅏ아ㅏ아아ㅏㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅏ저씨씨ㅣ씨씨씨
-      </div>
+      <div css={styles.title}>{props.title}</div>
+      <div css={styles.description}>{props.contents}</div>
     </div>
   );
 }

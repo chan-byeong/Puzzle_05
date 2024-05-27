@@ -3,16 +3,17 @@ import { css } from "@emotion/react";
 interface ProgressBarProps {
   step: number;
   TOTAL: number;
+  IsProgress?: boolean;
   customWidth?: string;
   customTop?: string;
   customLeft?: string;
   customHeigth?: string;
 }
 
-function ProgressBar({ step, TOTAL, customWidth, customLeft, customTop, customHeigth }: ProgressBarProps) {
+function ProgressBar({ step, TOTAL, IsProgress, customWidth, customLeft, customTop, customHeigth }: ProgressBarProps) {
   return (
-    <div css={styles.container(customWidth, customTop, customLeft, customHeigth)}>
-      <div css={styles.bar(step, TOTAL, customHeigth)} />
+    <div css={styles.container(IsProgress, customWidth, customTop, customLeft, customHeigth)}>
+      <div css={styles.bar(step, TOTAL, IsProgress, customHeigth)} />
       {/* <label css={styles.label(step, TOTAL)}>{(step / TOTAL) * 100}</label> */}
     </div>
   );
@@ -21,7 +22,13 @@ function ProgressBar({ step, TOTAL, customWidth, customLeft, customTop, customHe
 export default ProgressBar;
 
 const styles = {
-  container: (customWidth?: string, customTop?: string, customLeft?: string, customHeigth?: string) => css`
+  container: (
+    IsProgress?: boolean,
+    customWidth?: string,
+    customTop?: string,
+    customLeft?: string,
+    customHeigth?: string
+  ) => css`
     width: ${customWidth ? `${customWidth}px` : "100%"};
     height: ${customHeigth ? `${customHeigth}px` : "5px"};
     background-color: #d9d9d9;
@@ -30,14 +37,19 @@ const styles = {
     left: ${customLeft ? `${customLeft}px` : "0"};
     top: ${customTop ? `${customTop}px` : "0"};
 
-    border-radius: 5px;
+    border-radius: ${IsProgress ? "0px" : "5px"};
   `,
-  bar: (step: number, TOTAL: number, customHeigth?: string) => css`
+  bar: (step: number, TOTAL: number, IsProgress?: boolean, customHeigth?: string) => css`
     width: calc(${(step / TOTAL) * 100}%);
     height: ${customHeigth ? `${customHeigth}px` : "5px"};
-    /* border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px; */
-    border-radius: 5px;
+    ${IsProgress
+      ? css`
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        `
+      : css`
+          border-radius: 5px;
+        `}
     background-color: #00dd9b;
 
     position: absolute;

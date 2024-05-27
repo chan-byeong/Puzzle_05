@@ -12,8 +12,8 @@ function MateDetail() {
   const [modalOpen, setModalOpen] = useState(false);
 
   //TODO: uid로 글 정보 단건 조회
-  const { uid } = useParams();
-  console.log(uid);
+  const { matePostId } = useParams();
+  console.log(matePostId);
 
   const cards = [<MateInfoCard first />, <MateInfoCard />, <MateInfoCard />, <MateInfoCard />];
 

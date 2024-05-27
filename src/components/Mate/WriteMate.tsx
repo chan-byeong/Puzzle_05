@@ -11,8 +11,8 @@ function WriteMate() {
 
   return (
     <>
-      <PostHeader />
-      <ProgressBar step={step} TOTAL={TOTAL} />
+      <PostHeader title="글쓰기" />
+      <ProgressBar step={step} TOTAL={TOTAL} IsProgress={true} customTop="50" />
       <MateForm step={step} setStep={setStep} />
     </>
   );

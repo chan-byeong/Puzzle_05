@@ -30,20 +30,21 @@ interface DetailMatePostType {
 
 const getAllMatePosts = async (matePostId: number) => {
   const response = await request<DetailMatePostType>(`/mate-posts/${matePostId}`);
-  return response;
+  return response.data;
 };
 
 const useGetDetailMatePost = (matePostId: number) => {
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: [QUERY_KEYS.matePost, matePostId],
     queryFn: () => getAllMatePosts(matePostId),
   });
 
-  if (!data) {
-    throw new Error("data is undefined");
+  if (isError) {
+    // throw new Error("Error while fetching mate detail data");
+    console.log("Error while fetching mate detail data");
   }
 
-  return data as DetailMatePostType;
+  return data;
 };
 
 export default useGetDetailMatePost;

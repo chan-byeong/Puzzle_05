@@ -8,6 +8,7 @@ import AnnouncementPage from "./Pages/AnnouncementPage";
 
 import WriteMate from "./components/Mate/WriteMate";
 import MateDetail from "./components/Mate/MateDetail";
+import WriteShare from "./components/Share/WriteShare";
 
 const router = createBrowserRouter([
   {
@@ -50,8 +51,12 @@ const router = createBrowserRouter([
             element: <WriteMate />,
           },
           {
-            path: "/community/mate/:uid",
+            path: "/community/mate/:matePostId",
             element: <MateDetail />,
+          },
+          {
+            path: "/community/share-post",
+            element: <WriteShare />,
           },
           {
             path: "/community/announcement/:aid",

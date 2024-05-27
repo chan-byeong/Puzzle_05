@@ -91,13 +91,13 @@ function MateForm({ step, setStep }: MateFormProps) {
     setValue("dayOfWeek", updatedDays); // React Hook Form의 setValue를 사용하여 상태 업데이트
   };
 
-  const { field: personalTime } = useController({
-    name: "personalTime",
+  const { field: homeProtector } = useController({
+    name: "homeProtector",
     control,
   });
 
-  const { field: familiarity } = useController({
-    name: "familiarity",
+  const { field: cleaning } = useController({
+    name: "cleaning",
     control,
   });
 
@@ -106,8 +106,8 @@ function MateForm({ step, setStep }: MateFormProps) {
     control,
   });
 
-  const { field: homeProtector } = useController({
-    name: "homeProtector",
+  const { field: killBug } = useController({
+    name: "killBug",
     control,
   });
 
@@ -287,26 +287,26 @@ function MateForm({ step, setStep }: MateFormProps) {
         <F.Question>
           <label className="star">정리정돈</label>
           <div className="slider">
-            <DotSlider key="personalTime" ranges={ranges} value={personalTime.value} setValue={personalTime.onChange} />
-          </div>
-        </F.Question>
-
-        <F.Question>
-          <label className="star">청소</label>
-          <div className="slider">
-            <DotSlider key="familiarity" ranges={ranges} value={familiarity.value} setValue={familiarity.onChange} />
-          </div>
-        </F.Question>
-
-        <F.Question>
-          <label className="star">벌레잡기</label>
-          <div className="slider">
             <DotSlider
               key="homeProtector"
               ranges={ranges}
               value={homeProtector.value}
               setValue={homeProtector.onChange}
             />
+          </div>
+        </F.Question>
+
+        <F.Question>
+          <label className="star">청소</label>
+          <div className="slider">
+            <DotSlider key="cleaning" ranges={ranges} value={cleaning.value} setValue={cleaning.onChange} />
+          </div>
+        </F.Question>
+
+        <F.Question>
+          <label className="star">벌레잡기</label>
+          <div className="slider">
+            <DotSlider key="killBug" ranges={ranges} value={killBug.value} setValue={killBug.onChange} />
           </div>
         </F.Question>
       </F.FormSection>

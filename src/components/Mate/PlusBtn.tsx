@@ -6,7 +6,11 @@ import plus from "./images/plus.png";
 import plus_b from "./images/plus_b.png";
 import arrow from "./images/corner-down-right.png";
 
-function PlusBtn() {
+interface PlusBtnProps {
+  path: string;
+}
+
+function PlusBtn({ path }: PlusBtnProps) {
   const nav = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -15,14 +19,14 @@ function PlusBtn() {
     setIsOpen((pre) => !pre);
   };
 
-  // TODO: 새로쓰기 , 불러오기 네비게이터 연결
+  // TODO: 불러오기 네비게이터 연결
   return (
     <>
       <div css={styles.plus_btn} onClick={handlePlusBtn} />
       {isOpen && (
         <>
           <div css={styles.modal}>
-            <span onClick={() => nav("/community/mate-post")}>
+            <span onClick={() => nav(path)}>
               <div css={styles.icon(plus_b)} />
               <p>새로 쓰기</p>
             </span>
