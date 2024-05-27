@@ -1,8 +1,13 @@
-import React from "react";
+import { Suspense } from "react";
+
 import Share from "../components/Share/Share";
 
 function SharePage() {
-  return <Share />;
+  return (
+    <Suspense fallback={<h1>Loading...</h1>}>
+      <Share />;
+    </Suspense>
+  );
 }
 
 export default SharePage;
