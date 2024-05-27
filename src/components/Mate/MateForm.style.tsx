@@ -9,13 +9,13 @@ export const NumberInput = styled.input`
   border: none;
 
   color: #3a3a3a;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
   text-align: center;
 
   &::placeholder {
     color: #a0a0a0;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
   }
   &:focus {
@@ -29,7 +29,7 @@ const Btn = styled.button<{ selected: boolean }>`
   align-items: center;
 
   border-radius: 15px;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 500;
   border: none;
 
@@ -38,9 +38,9 @@ const Btn = styled.button<{ selected: boolean }>`
 `;
 
 export const BinaryBtn = styled(Btn)`
-  width: 93px;
-  height: 40px;
-  border-radius: 20px;
+  width: 101px;
+  height: 48px;
+  border-radius: 24px;
 
   margin-right: 10px;
 `;
@@ -64,6 +64,14 @@ export const TextSection = styled.div`
     font-size: 20px;
     font-weight: 600;
   }
+  & > .star {
+    &::after {
+      content: "*";
+      color: var(--Mint, #00dd9b);
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
 
   & > input,
   textarea {
@@ -81,6 +89,10 @@ export const TextSection = styled.div`
     &:focus {
       outline: none;
     }
+  }
+
+  & > input {
+    font-size: 20px;
   }
 
   & > textarea {
@@ -106,7 +118,6 @@ export const Question = styled.div`
   margin-top: 30px;
   width: 100%;
   max-width: 430px;
-
   flex-shrink: 0;
 
   & > label {
@@ -127,7 +138,7 @@ export const Question = styled.div`
   & > div {
     margin-top: 10px;
     color: #3a3a3a;
-    font-size: 15px;
+    font-size: 20px;
   }
 
   & > .mbti {

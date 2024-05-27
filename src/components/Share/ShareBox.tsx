@@ -4,20 +4,46 @@ import { css } from "@emotion/react";
 import temp_food from "./image/IMG_3203.jpeg";
 import user_icon from "./image/users.png";
 
-function ShareBox() {
+interface ShareBoxProps {
+  buyPostId: number;
+  title: string;
+  category: string;
+  endDay: string;
+  endTime: string;
+  counts: number;
+  price: number;
+  link: string;
+}
+
+const dateConverter = (date: string) => {
+  const today = new Date();
+  const todayString = `${today.getMonth() + 1}월 ${today.getDate()}일(${today.toLocaleDateString("ko-KR", {
+    weekday: "short",
+  })})`;
+
+  if (todayString === date) return "오늘";
+  else return `${today.getMonth() + 1}/${today.getDate()}`;
+};
+
+function ShareBox(props: ShareBoxProps) {
+  // 날짜 === 오늘 -> 오늘
+  // 5월 21일 !== 오늘 -> 5/21
+  const endDay = dateConverter(props.endDay);
+  const endDate = `${endDay} ${props.endTime} 까지`;
+
   return (
     <div css={styles.container}>
-      <div css={styles.time_tag}>~~까지</div>
-      <div css={styles.type_tag}>배달</div>
+      <div css={styles.time_tag}>{endDate}</div>
+      <div css={styles.type_tag}>{props.category}</div>
       <div css={styles.thumbnail(temp_food)}></div>
       <div css={styles.bottom_info}>
         <div css={styles.left}>
-          <p className="title">밤에 먹어도 죄책감 없는 마라탕</p>
-          <p className="people">1/2</p>
+          <p className="title">{props.title}</p>
+          <p className="people">? / {props.counts}</p>
         </div>
         <div css={styles.right}>
           <p className="before_price">100000원</p>
-          <p>20000원</p>
+          <p>{props.price}</p>
         </div>
       </div>
     </div>
