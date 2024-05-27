@@ -5,7 +5,7 @@ import Share from "../components/Share/Share";
 function SharePage() {
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
-      <Share />;
+      <Share />
     </Suspense>
   );
 }
