@@ -4,7 +4,7 @@ import RoomMate from "../components/Mate/RoomMate";
 function RoomMatePage() {
   return (
     <Suspense fallback={<h1>Loading...</h1>}>
-      <RoomMate />;
+      <RoomMate />
     </Suspense>
   );
 }
