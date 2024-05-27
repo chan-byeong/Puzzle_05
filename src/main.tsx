@@ -6,13 +6,21 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import router from "./Router.tsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      staleTime: 600 * 1000,
+      retry: 0,
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router}></RouterProvider>
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router}></RouterProvider>
+    <ReactQueryDevtools />
+  </QueryClientProvider>
+  // </React.StrictMode>
 );
