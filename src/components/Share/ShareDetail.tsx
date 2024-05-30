@@ -12,7 +12,7 @@ interface ShareDetailProps {
   counts: number;
   price: number;
   link: string;
-  setDetailModal: React.Dispatch<React.SetStateAction<number>>;
+  modalSetter: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 const dateConverter = (date: string) => {
@@ -24,7 +24,6 @@ const dateConverter = (date: string) => {
   if (todayString === date) return "오늘";
   else return `${today.getMonth() + 1}/${today.getDate()}`;
 };
-//TODO: ShareDetail - props로 데이터 전달
 
 function ShareDetail(props: ShareDetailProps) {
   const endDay = dateConverter(props.endDay);
@@ -32,8 +31,10 @@ function ShareDetail(props: ShareDetailProps) {
 
   const handleModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    props.setDetailModal(-1);
-    console.log("handlemodal");
+    setTimeout(() => {
+      props.modalSetter(null); // 비동기적으로 상태 변경
+    }, 0);
+    console.log("shadow Clicked");
   };
 
   const onClickContainer = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -43,6 +44,7 @@ function ShareDetail(props: ShareDetailProps) {
 
   return (
     <>
+      <S.BackShadow onClick={handleModal} />
       <S.Container onClick={onClickContainer}>
         <div css={styles.wrapper}>
           <S.Profile />
@@ -85,7 +87,6 @@ function ShareDetail(props: ShareDetailProps) {
 
         <S.Btn css={styles.top_margin}>공동구매 신청하기</S.Btn>
       </S.Container>
-      <S.BackShadow onClick={handleModal} />
     </>
   );
 }
