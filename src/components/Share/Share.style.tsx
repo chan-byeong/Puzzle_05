@@ -41,14 +41,14 @@ export const BackShadow = styled.div`
   top: 0;
   left: 0;
   width: 390px;
-  height: ${window.innerHeight < 844 ? "844px" : "100vh"};
+  height: 100%;
   background-color: rgba(57, 57, 57, 0.5);
   z-index: 25;
 `;
 
 export const Container = styled.section`
   width: 100%;
-  max-width: 430px;
+  max-width: 390px;
   height: 368px;
   border-radius: 30px 30px 0px 0px;
   background: #fff;
@@ -58,9 +58,11 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
 
-  position: absolute;
-  top: calc(${innerHeight}px - 368px);
-  left: 0;
+  position: fixed;
+  /* top: calc(${innerHeight}px - 368px); */
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
 
   // animation bottom -> top
   z-index: 30;

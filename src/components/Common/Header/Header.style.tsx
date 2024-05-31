@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import kull_logo from "./images/kull-icon.png";
+import kull_logo from "./images/kull-icon2.png";
 import message from "./images/message-circle.png";
 import back_icon from "./images/chevron-left.png";
 import search_icon from "./images/search.png";
@@ -25,9 +25,11 @@ const ImgBox = styled.div`
 `;
 
 export const Logo = styled(ImgBox)`
-  width: 50px;
+  width: 100px;
   height: 25px;
   background-image: url(${kull_logo});
+  background-size: contain;
+  background-repeat: no-repeat;
 `;
 
 export const Message = styled(ImgBox)`

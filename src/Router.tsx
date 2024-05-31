@@ -43,6 +43,10 @@ const router = createBrowserRouter([
                 path: "/community/announcement",
                 element: <AnnouncementPage />,
               },
+              {
+                path: "/community/bulletin",
+                element: <h1>자유게시판</h1>,
+              },
             ],
           },
           // MATEHOME 헤더가 아닌 다른 헤더 사용할 경우 아래로 라우팅

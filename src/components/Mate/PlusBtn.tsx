@@ -109,8 +109,8 @@ const styles = {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: ${window.innerHeight < 844 ? "844px" : "100vh"};
+    width: 390px;
+    height: 100%;
 
     background-color: #00000014;
     z-index: 8;

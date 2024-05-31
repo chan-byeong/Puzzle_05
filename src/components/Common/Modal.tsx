@@ -56,7 +56,8 @@ const styles = {
     top: 0;
     left: 0;
     width: 100vw;
-    height: ${window.innerHeight < 844 ? "844px" : "100vh"};
+    max-width: 390px;
+    height: 100%;
 
     background-color: #0000005c;
     z-index: 25;
