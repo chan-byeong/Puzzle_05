@@ -182,6 +182,7 @@ export default ShareForm;
 const styles = {
   container: css`
     width: 90%;
+    max-width: 358px;
     display: flex;
     justify-content: space-between;
 
