@@ -5,13 +5,12 @@ import { css } from "@emotion/react";
 
 //TODO: 라우팅 제거 시 탭 리스트 수정
 const TAB_LIST = [
-  ["전체", "/community/all"],
   ["룸메 찾기", "/community/mate"],
   ["공동구매", "/community/share"],
-  ["자유게시판", "/reservation"],
-  ["언어교환", "/reservation"],
+  ["자유게시판", "/community/bulletin"],
+  // ["언어교환", "/community"],
   ["공지사항", "/community/announcement"],
-  ["건의사항", "/rjsdml"],
+  // ["건의사항", "/rjsdml"],
 ];
 
 interface TabContainerProps {
