@@ -55,8 +55,8 @@ export default TabContainer;
 
 const styles = {
   tabContainer: css`
-    /* width: 100%; */
-    /* max-width: 358px; */
+    width: 100%;
+    max-width: 390px;
     position: absolute;
     left: 0;
     top: 50px;
