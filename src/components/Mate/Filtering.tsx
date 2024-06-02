@@ -4,8 +4,12 @@ import { css } from "@emotion/react";
 import x from "./images/x.svg";
 import down_arrow from "./images/chevron-down.png";
 
+import Sorting from "../Common/Sorting";
+
 function Filtering() {
   const [filters, setfilters] = useState([]);
+  const [sort, setSort] = useState<string>("최신순");
+  const [modalOpen, setModalOpen] = useState(false);
 
   const deletefilter = (index: number) => {
     const tmp = filters;
@@ -32,7 +36,9 @@ function Filtering() {
 
       <div css={styles.container}>
         {/* TODO: 화살표 추가 및 정렬 모달 추가 */}
-        <div css={styles.sorting}>최신순&nbsp;</div>
+        {/* <div css={styles.sorting}>최신순&nbsp;</div> */}
+        <Sorting sort={sort} setSort={setSort} modalOpen={modalOpen} setModalOpen={setModalOpen} />
+
         {/* prettier-ignore */}
         <div css={[styles.filter, css`padding: 0 16px;`]}>필터</div>
       </div>
