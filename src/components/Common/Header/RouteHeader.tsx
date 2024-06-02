@@ -9,7 +9,7 @@ function RouteHeader() {
     <H.HeaderBox style={{ marginBottom: "42px" }}>
       <H.Back onClick={() => nav("/")} />
       <H.Title>게시판</H.Title>
-      <H.Message />
+      <H.Message style={{ marginRight: "0" }} />
     </H.HeaderBox>
   );
 }
