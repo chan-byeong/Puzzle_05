@@ -15,14 +15,24 @@ interface ShareBoxProps {
   link: string;
 }
 
+const CATEGORY: { [key: string]: string } = {
+  delivery: "배달",
+  product: "물품",
+};
+
 const dateConverter = (date: string) => {
+  console.log(date);
   const today = new Date();
   const todayString = `${today.getMonth() + 1}월 ${today.getDate()}일(${today.toLocaleDateString("ko-KR", {
     weekday: "short",
   })})`;
-
   if (todayString === date) return "오늘";
-  else return `${today.getMonth() + 1}/${today.getDate()}`;
+  else {
+    const regex = /(\d{1,2})월 (\d{1,2})일/;
+    const matches = date.match(regex);
+    console.log(matches);
+    return matches !== null && `${matches[1]}/${matches[2]}`;
+  }
 };
 
 function ShareBox(props: ShareBoxProps) {
@@ -34,7 +44,7 @@ function ShareBox(props: ShareBoxProps) {
   return (
     <div css={styles.container}>
       <div css={styles.time_tag}>{endDate}</div>
-      <div css={styles.type_tag}>{props.category}</div>
+      <div css={styles.type_tag}>{CATEGORY[props.category]}</div>
       <div css={styles.thumbnail(temp_food)}></div>
       <div css={styles.bottom_info}>
         <div css={styles.left}>
@@ -42,8 +52,8 @@ function ShareBox(props: ShareBoxProps) {
           <p className="people">? / {props.counts}</p>
         </div>
         <div css={styles.right}>
-          <p className="before_price">100000원</p>
-          <p>{props.price}</p>
+          <p className="before_price">{props.price}원</p>
+          <p>{props.price / props.counts}원</p>
         </div>
       </div>
     </div>
@@ -67,8 +77,8 @@ const styles = {
 
   time_tag: css`
     display: flex;
-    width: 104px;
-    padding: 4px 0;
+    min-width: 104px;
+    padding: 4px;
     justify-content: center;
     align-items: center;
 
@@ -97,7 +107,7 @@ const styles = {
 
     position: absolute;
     top: 10px;
-    left: 120px;
+    left: 128px;
 
     color: #00dd9b;
     font-size: 13px;

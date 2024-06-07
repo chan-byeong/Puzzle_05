@@ -1,13 +1,12 @@
-import React from "react";
 import { css } from "@emotion/react";
-import { useNavigate } from "react-router-dom";
 
 import Filtering from "../Mate/Filtering";
 import AnnouncementBox from "./AnnouncementBox";
+import useGetNotices from "../../hooks/Announcement/useGetNotices";
 
 //TODO: 공지사항 리스트 GET
 function Announcement() {
-  const nav = useNavigate();
+  const notices = useGetNotices();
 
   return (
     <div>
@@ -17,14 +16,11 @@ function Announcement() {
           margin-top: 12px;
         `}
       >
-        <div onClick={() => nav(`${1}`)}>
-          <AnnouncementBox />
-        </div>
-        <AnnouncementBox />
-        <AnnouncementBox />
-        <AnnouncementBox />
-        <AnnouncementBox />
-        <AnnouncementBox />
+        {notices.map((item, index) => (
+          <div key={index} onClick={() => window.open(item.url)}>
+            <AnnouncementBox {...item} />
+          </div>
+        ))}
       </div>
     </div>
   );

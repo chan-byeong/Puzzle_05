@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import request from "../../api";
-import { QUERY_KEYS } from "../../Constans";
+import request from "../api";
+import { QUERY_KEYS } from "../Constans";
 
 interface SharePostType {
   buyPostId: number;
@@ -20,7 +20,7 @@ const getAllSharePosts = async () => {
 };
 
 const useGetAllSharePosts = () => {
-  const { data } = useSuspenseQuery({ queryKey: [QUERY_KEYS.allSharePost], queryFn: getAllSharePosts });
+  const { data = [] } = useSuspenseQuery({ queryKey: [QUERY_KEYS.allSharePost], queryFn: getAllSharePosts });
 
   if (!data) {
     // throw new Error("data is undefined");

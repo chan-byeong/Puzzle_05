@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint */
 // 역할, 트랙 select 스타일
+
 const numberStyle = {
   indicatorSeparator: () => ({
     backgroundColor: "transparent",
@@ -192,7 +193,7 @@ const dateStyle = {
     fontSize: "20px",
     fontWeight: "500",
     border: state.isFocused ? " 1px solid #00DD9B" : "1px solid var(--grey-400, #DCDFE3)",
-    width: state.isFocused ? "184px" : "184px",
+    width: state.isFocused ? "194px" : "194px",
     height: state.isFocused ? "48px" : "48px",
     borderRadius: "15px",
     backgroundColor: "#E5E5E5",

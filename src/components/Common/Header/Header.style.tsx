@@ -22,6 +22,8 @@ export const HeaderBox = styled("div")`
 const ImgBox = styled.div`
   background-position: center;
   background-size: contain;
+
+  cursor: pointer;
 `;
 
 export const Logo = styled(ImgBox)`
@@ -44,6 +46,7 @@ export const Back = styled(ImgBox)`
   width: 24px;
   height: 24px;
   background-image: url(${back_icon});
+  cursor: pointer;
 `;
 
 export const SearchIcon = styled(ImgBox)`
@@ -74,8 +77,8 @@ export const Title = styled.span`
   color: #3a3a3a;
   font-size: 20px;
   font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  font-weight: 600;
+  line-height: 18px;
 `;
 
 export const MiddleTxt = styled.span`

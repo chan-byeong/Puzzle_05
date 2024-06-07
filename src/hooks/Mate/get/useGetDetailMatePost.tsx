@@ -28,12 +28,12 @@ interface DetailMatePostType {
   gameAndCall: number;
 }
 
-const getAllMatePosts = async (matePostId: number) => {
+const getAllMatePosts = async (matePostId: string) => {
   const response = await request<DetailMatePostType>(`/mate-posts/${matePostId}`);
   return response.data;
 };
 
-const useGetDetailMatePost = (matePostId: number) => {
+const useGetDetailMatePost = (matePostId: string) => {
   const { data, isError } = useQuery({
     queryKey: [QUERY_KEYS.matePost, matePostId],
     queryFn: () => getAllMatePosts(matePostId),
