@@ -18,8 +18,13 @@ function Sorting({ sort, setSort, modalOpen, setModalOpen }: SortingProps) {
       {sort}
       {modalOpen && (
         <div css={style.sortBox}>
-          {sortOptions.map((item) => {
-            if (sort !== item) return <p onClick={() => setSort(item)}>{item}</p>;
+          {sortOptions.map((item, index) => {
+            if (sort !== item)
+              return (
+                <p key={index + "sort"} onClick={() => setSort(item)}>
+                  {item}
+                </p>
+              );
           })}
         </div>
       )}
