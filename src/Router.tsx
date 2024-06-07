@@ -9,6 +9,11 @@ import AnnouncementPage from "./Pages/AnnouncementPage";
 import WriteMate from "./components/Mate/WriteMate";
 import MateDetail from "./components/Mate/MateDetail";
 import WriteShare from "./components/Share/WriteShare";
+import LoginPage from "./Pages/LoginPage";
+import SignupPage from "./Pages/SignupPage";
+import User from "./components/User/User";
+import ChatList from "./components/Chat/ChatList";
+import ChatRoom from "./components/Chat/ChatRoom";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +23,26 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/signup",
+        element: <SignupPage />,
+      },
+      {
+        path: "/profile",
+        element: <User />,
+      },
+      {
+        path: "/chat",
+        element: <ChatList />,
+      },
+      {
+        path: "/chat/:chatId",
+        element: <ChatRoom />,
       },
       {
         path: "/community",
