@@ -83,6 +83,7 @@ const styles = {
 
     position: absolute;
     top: 18px;
-    left: 47%;
+    left: 50%;
+    transform: translate(-50%);
   `,
 };
