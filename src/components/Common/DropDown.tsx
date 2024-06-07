@@ -19,7 +19,7 @@ function DropDown({ options, placeholder, styleOption, onChange }: DropDownProps
   const styleOptions = (styleOption: string) => {
     if (styleOption === "time") return timeStyle;
     if (styleOption === "date") return dateStyle;
-    if (styleOption === " num") return numberStyle;
+    if (styleOption === "num") return numberStyle;
   };
 
   return (
