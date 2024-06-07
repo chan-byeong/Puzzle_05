@@ -1,13 +1,20 @@
-import React from "react";
 import { css } from "@emotion/react";
 
+interface AnnouncementBoxProps {
+  title: string;
+  writer: string;
+  date: string;
+  visits: string;
+}
+
 // TODO: 공지사항 글 정보 props로
-function AnnouncementBox() {
+function AnnouncementBox({ title, writer, date, visits }: AnnouncementBoxProps) {
   return (
     <div css={styles.container}>
-      <div css={styles.title}>[장학] 2024.1학기 쿨나눔 장학생 합격 발표 안내 (약정서약 확인)</div>
+      <div css={styles.title}>{title}</div>
       <p css={styles.info}>
-        <span>24.05.10</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>행정실</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>조회 100</span>
+        <span>{date}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{writer}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <span>조회 {visits}</span>
       </p>
     </div>
   );
