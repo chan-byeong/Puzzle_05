@@ -1,13 +1,12 @@
-import React from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { css } from "@emotion/react";
-import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 import * as S from "../Mate/MateForm.style";
 import DropDown from "../Common/DropDown";
 import { OptionType } from "../Common/DropDown";
 import left_arrow from "../Mate/images/chevron-left-w.png";
-import request from "../../hooks/api";
+import usePostSharePost from "../../hooks/Share/usePostSharePost";
 
 interface ShareFormProps {
   step: number;
@@ -48,8 +47,9 @@ const generateDateOptions = (): OptionType[] => {
     const currentDate = new Date(today);
     currentDate.setDate(today.getDate() + i);
 
-    const month = `${currentDate.getMonth() + 1}`.padStart(2, "0");
-    const date = `${currentDate.getDate()}`.padStart(2, "0");
+    //.padStart(2, "0");
+    const month = `${currentDate.getMonth() + 1}`;
+    const date = `${currentDate.getDate()}`;
     const day = currentDate.toLocaleDateString("ko-KR", { weekday: "short" });
 
     const formattedDate = `${month}월 ${date}일(${day})`;
@@ -64,11 +64,8 @@ const dateOptions = generateDateOptions();
 
 function ShareForm({ step, setStep }: ShareFormProps) {
   const { register, handleSubmit, watch, setValue } = useForm();
-
-  const mutation = useMutation({
-    mutationKey: ["share-form"],
-    mutationFn: (data: SharePostDataType) => request("/buy-posts", { method: "post", body: JSON.stringify(data) }),
-  });
+  const nav = useNavigate();
+  const { mutation } = usePostSharePost();
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
     data.counts = parseInt(data.counts);
@@ -76,6 +73,7 @@ function ShareForm({ step, setStep }: ShareFormProps) {
     const formData: SharePostDataType = data as SharePostDataType; // FormData로 변환
     console.log(formData);
     mutation.mutate(formData);
+    nav(-1);
   };
 
   const handelSelectChange = (field: keyof SharePostDataType) => (selectedOption: OptionType | null) => {

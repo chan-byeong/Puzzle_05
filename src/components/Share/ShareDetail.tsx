@@ -15,14 +15,24 @@ interface ShareDetailProps {
   modalSetter: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
+const CATEGORY: { [key: string]: string } = {
+  delivery: "배달",
+  product: "물품",
+};
+
 const dateConverter = (date: string) => {
+  console.log(date);
   const today = new Date();
   const todayString = `${today.getMonth() + 1}월 ${today.getDate()}일(${today.toLocaleDateString("ko-KR", {
     weekday: "short",
   })})`;
-
   if (todayString === date) return "오늘";
-  else return `${today.getMonth() + 1}/${today.getDate()}`;
+  else {
+    const regex = /(\d{1,2})월 (\d{1,2})일/;
+    const matches = date.match(regex);
+    console.log(matches);
+    return matches !== null && `${matches[1]}/${matches[2]}`;
+  }
 };
 
 function ShareDetail(props: ShareDetailProps) {
@@ -53,7 +63,7 @@ function ShareDetail(props: ShareDetailProps) {
 
         <div css={styles.wrapper}>
           {/* prettier-ignore */}
-          <S.Tag css={css`margin-right: 12px;`}>{props.category}</S.Tag>
+          <S.Tag css={css`margin-right: 12px;`}>{CATEGORY[props.category]}</S.Tag>
           <S.Title>{props.title}</S.Title>
         </div>
 
@@ -76,11 +86,11 @@ function ShareDetail(props: ShareDetailProps) {
               </div>
               <div css={styles.wrapper}>
                 <S.Credit />
-                <S.BeforePrice>100,000원</S.BeforePrice>
+                <S.BeforePrice>{props.price}원</S.BeforePrice>
               </div>
               {/* prettier-ignore */}
               <S.Prices css={css`margin-left: 29px;`}> 
-                {props.price}원
+                {props.price / props.counts}원
               </S.Prices>
             </div>
         </div>
