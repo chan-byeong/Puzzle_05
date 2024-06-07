@@ -4,9 +4,11 @@ import { css } from "@emotion/react";
 interface ModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
+  function?: boolean;
 }
 
-function Modal({ isOpen, setIsOpen }: ModalProps) {
+function Modal({ isOpen, setIsOpen, title }: ModalProps) {
   const handleModal = () => {
     setIsOpen((pre) => !pre);
   };
@@ -16,7 +18,7 @@ function Modal({ isOpen, setIsOpen }: ModalProps) {
       {isOpen && (
         <>
           <div css={styles.container}>
-            <div css={styles.title}>메이트 신청을 할까요?</div>
+            <div css={styles.title}>{title}</div>
             <div css={styles.btn_box}>
               <button css={styles.btn_n} onClick={handleModal}>
                 아니오
