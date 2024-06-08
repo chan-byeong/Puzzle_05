@@ -5,12 +5,7 @@ import MenuList from "./MenuList";
 import HomeMenus from "./HomeMenus";
 import Diets from "./Diets";
 
-import useAuth from "../../hooks/Login/useAuth";
-
 function Home() {
-  const profile = useAuth();
-  console.log(profile);
-
   return (
     <>
       <MenuList />

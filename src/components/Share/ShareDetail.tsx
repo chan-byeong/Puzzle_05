@@ -2,6 +2,7 @@ import React from "react";
 import { css } from "@emotion/react";
 
 import * as S from "./Share.style";
+import useApplyShare from "../../hooks/Share/useApplyShare";
 
 interface ShareDetailProps {
   buyPostId: number;
@@ -12,6 +13,7 @@ interface ShareDetailProps {
   counts: number;
   price: number;
   link: string;
+  num: number;
   modalSetter: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
@@ -21,7 +23,6 @@ const CATEGORY: { [key: string]: string } = {
 };
 
 const dateConverter = (date: string) => {
-  console.log(date);
   const today = new Date();
   const todayString = `${today.getMonth() + 1}월 ${today.getDate()}일(${today.toLocaleDateString("ko-KR", {
     weekday: "short",
@@ -38,6 +39,7 @@ const dateConverter = (date: string) => {
 function ShareDetail(props: ShareDetailProps) {
   const endDay = dateConverter(props.endDay);
   const endDate = `${endDay} ${props.endTime} 까지`;
+  const mutation = useApplyShare(props.buyPostId);
 
   const handleModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
@@ -45,6 +47,13 @@ function ShareDetail(props: ShareDetailProps) {
       props.modalSetter(null); // 비동기적으로 상태 변경
     }, 0);
     console.log("shadow Clicked");
+  };
+
+  const onClickApply = () => {
+    mutation.mutate();
+    setTimeout(() => {
+      props.modalSetter(null); // 비동기적으로 상태 변경
+    }, 500);
   };
 
   const onClickContainer = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -82,7 +91,7 @@ function ShareDetail(props: ShareDetailProps) {
               </div>
               <div css={styles.wrapper}>
                 <S.Users />
-                <S.Text>?/{props.counts}명</S.Text>
+                <S.Text>{props.num} / {props.counts}명</S.Text>
               </div>
               <div css={styles.wrapper}>
                 <S.Credit />
@@ -95,7 +104,9 @@ function ShareDetail(props: ShareDetailProps) {
             </div>
         </div>
 
-        <S.Btn css={styles.top_margin}>공동구매 신청하기</S.Btn>
+        <S.Btn css={styles.top_margin} onClick={onClickApply}>
+          공동구매 신청하기
+        </S.Btn>
       </S.Container>
     </>
   );

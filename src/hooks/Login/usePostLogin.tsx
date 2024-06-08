@@ -16,7 +16,7 @@ const requestLogin = async (data: LoginType) => {
     credentials: "include",
   });
 
-  if (response.status !== 200) {
+  if (!response.ok) {
     throw new Error("Error occurs while requesting login");
   }
 
@@ -40,7 +40,7 @@ function usePostLogin() {
       if (data.status === 200) nav("/");
       else alert("로그인 실패: 학번,비번을 확인하세요");
     },
-    onError: () => alert("네트워크 에러!"),
+    onError: () => alert("로그인 에러!"),
   });
   return mutation;
 }

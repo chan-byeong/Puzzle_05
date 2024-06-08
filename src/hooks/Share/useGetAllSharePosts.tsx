@@ -12,6 +12,7 @@ interface SharePostType {
   counts: number;
   price: number;
   link: string;
+  num: number;
 }
 
 const getAllSharePosts = async () => {

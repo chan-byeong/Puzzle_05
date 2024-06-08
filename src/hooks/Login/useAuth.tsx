@@ -10,14 +10,23 @@ interface ProfileType {
   roomNum: string;
 }
 
+const initialData = {
+  email: 0,
+  name: "x",
+  grade: 0,
+  hall: "x",
+  roomNum: "x",
+};
+
 const requestProfile = async () => {
   const response = await request<ProfileType>("/member/profile");
-  console.log(response);
   return response.data;
 };
 
 function useAuth() {
-  const { data } = useQuery({ queryKey: ["user-profile"], queryFn: requestProfile });
+  const { data = initialData } = useQuery({ queryKey: ["user-profile"], queryFn: requestProfile });
+
+  if (typeof data === "string") return undefined;
 
   return data;
 }

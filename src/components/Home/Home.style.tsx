@@ -116,7 +116,7 @@ export const HomeBox = styled.section<{ height?: number }>`
 
   cursor: pointer;
 
-  & > :first-child {
+  & > :first-of-type {
     color: var(--Black, #3a3a3a);
     font-size: 24px;
     font-weight: 600;

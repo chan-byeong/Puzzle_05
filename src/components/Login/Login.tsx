@@ -19,7 +19,6 @@ function Login() {
   const onSubmit: SubmitHandler<FieldValues> = async (data: FieldValues) => {
     const userLogin = data as LoginType;
     mutation.mutate(userLogin);
-    console.log(userLogin);
   };
 
   return (

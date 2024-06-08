@@ -12,7 +12,7 @@ function DotSlider({ ranges, value, setValue }: DotSliderProps) {
     <div css={styles.container}>
       {ranges.map((item, index) => (
         <>
-          <div key={index} css={styles.dot(index, value)} onClick={() => setValue(index)}>
+          <div key={index + item} css={styles.dot(index, value)} onClick={() => setValue(index)}>
             {typeof item === "number" && <label css={styles.label(value === index)}>{item}</label>}
           </div>
         </>
@@ -83,6 +83,7 @@ const styles = {
 
     position: absolute;
     top: 18px;
-    left: 47%;
+    left: 50%;
+    transform: translate(-50%);
   `,
 };

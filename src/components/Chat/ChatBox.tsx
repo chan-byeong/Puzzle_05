@@ -1,15 +1,17 @@
 import React from "react";
 import { css } from "@emotion/react";
 
-function ChatBox() {
+interface ChatBoxProps {
+  roomId: string;
+}
+
+function ChatBox({ roomId }: ChatBoxProps) {
   return (
     <div css={styles.container}>
       <div css={styles.imgbox} />
       <div>
-        <p css={styles.title}>22학번 컴퓨터공학부</p>
-        <p css={styles.caption}>
-          안녕하세요 2024학년도 1학기 레이크홀 룸메 구합니다. 예민하지 않고 깨끗합니다. 같이 즐거운 한 학기 보내요~~
-        </p>
+        <p css={styles.title}>{roomId}번 채팅방</p>
+        <p css={styles.caption}>마지막 채팅 내역</p>
       </div>
     </div>
   );
@@ -31,6 +33,8 @@ const styles = {
     align-items: center;
 
     margin-top: 10px;
+
+    cursor: pointer;
   `,
   imgbox: css`
     width: 56px;

@@ -1,12 +1,11 @@
 import { useForm, useController, SubmitHandler, FieldValues } from "react-hook-form";
 import { useState } from "react";
 import { css } from "@emotion/react";
+import { useNavigate } from "react-router-dom";
 
 import * as F from "./MateForm.style";
 import DotSlider from "./DotSlider";
-import { useMutation } from "@tanstack/react-query";
-import request from "../../hooks/api";
-
+import usePostMatePost from "../../hooks/Mate/post/usePostMatePost";
 import left_arrow from "./images/chevron-left-w.png";
 
 type FormData = {
@@ -50,7 +49,12 @@ const MBTI = [
   "ESTJ",
 ];
 const WEEK = ["월", "화", "수", "목", "금", "토", "일"];
-const ranges = ["하나", "두울", "세엣", "네엣", "다섯"];
+
+const DELIVERY = ["안 먹음", "일주일 1번 이하", "일주일 2-3번", "일주일 4-5번", "매일"];
+const GAME = ["거의 안함", "일주일 1번 이하", "일주일 2-3번", "일주일 4-5번", "매일"];
+const TIDYUP = ["바닥에 던져둠", "필요할 때만", "가끔 어지러운 편", "정해진 위치에만", "언제나 각잡히게"];
+const CLEANING = [" 전혀 안함", "더러우면 가끔", "일주일에 2-3번", "일주일에 4-5번", "매일"];
+const BUG = ["아예 못 잡음", "  초소형벌레 가능", "  중형 벌레 가능", "  바퀴벌레 가능", "  벌레와 친함"];
 // const delivery = [""]
 
 interface MateFormProps {
@@ -62,15 +66,13 @@ function MateForm({ step, setStep }: MateFormProps) {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   // prettier-ignore
   const { register, handleSubmit, control , watch, setValue } = useForm();
-  const mutation = useMutation({
-    mutationKey: ["mate-form"],
-    mutationFn: (data: FormData) => request("/mate-posts", { method: "post", body: JSON.stringify(data) }),
-  });
+  const nav = useNavigate();
+
+  const mutation = usePostMatePost();
 
   const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
     const formData: FormData = data as FormData; // FormData로 변환
     console.log(formData);
-    console.log("onsubmit");
     data.age = parseInt(data.age);
     data.wakeUpStart = parseInt(data.wakeUpStart);
     data.wakeUpEnd = parseInt(data.wakeUpEnd);
@@ -79,10 +81,8 @@ function MateForm({ step, setStep }: MateFormProps) {
     data.showerStart = parseInt(data.showerStart);
     data.showerEnd = parseInt(data.showerEnd);
     mutation.mutate(formData);
-    console.log(mutation.data);
-    mutation.isSuccess && console.log("success");
-    mutation.isError && console.log("error");
   };
+  if (mutation.isSuccess) nav(-1);
 
   const handleDayClick = (day: string) => {
     const updatedDays = selectedDays.includes(day) ? selectedDays.filter((d) => d !== day) : [...selectedDays, day];
@@ -273,14 +273,19 @@ function MateForm({ step, setStep }: MateFormProps) {
         <F.Question>
           <label className="star">배달 음식</label>
           <div className="slider">
-            <DotSlider key="deliveryFood" ranges={ranges} value={deliveryFood.value} setValue={deliveryFood.onChange} />
+            <DotSlider
+              key="deliveryFood"
+              ranges={DELIVERY}
+              value={deliveryFood.value}
+              setValue={deliveryFood.onChange}
+            />
           </div>
         </F.Question>
 
         <F.Question>
           <label className="star">게임 / 통화</label>
           <div className="slider">
-            <DotSlider key="gameAndCall" ranges={ranges} value={gameAndCall.value} setValue={gameAndCall.onChange} />
+            <DotSlider key="gameAndCall" ranges={GAME} value={gameAndCall.value} setValue={gameAndCall.onChange} />
           </div>
         </F.Question>
 
@@ -289,7 +294,7 @@ function MateForm({ step, setStep }: MateFormProps) {
           <div className="slider">
             <DotSlider
               key="homeProtector"
-              ranges={ranges}
+              ranges={TIDYUP}
               value={homeProtector.value}
               setValue={homeProtector.onChange}
             />
@@ -299,14 +304,14 @@ function MateForm({ step, setStep }: MateFormProps) {
         <F.Question>
           <label className="star">청소</label>
           <div className="slider">
-            <DotSlider key="cleaning" ranges={ranges} value={cleaning.value} setValue={cleaning.onChange} />
+            <DotSlider key="cleaning" ranges={CLEANING} value={cleaning.value} setValue={cleaning.onChange} />
           </div>
         </F.Question>
 
         <F.Question>
           <label className="star">벌레잡기</label>
           <div className="slider">
-            <DotSlider key="killBug" ranges={ranges} value={killBug.value} setValue={killBug.onChange} />
+            <DotSlider key="killBug" ranges={BUG} value={killBug.value} setValue={killBug.onChange} />
           </div>
         </F.Question>
       </F.FormSection>
