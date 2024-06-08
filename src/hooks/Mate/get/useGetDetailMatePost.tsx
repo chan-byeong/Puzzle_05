@@ -28,7 +28,7 @@ interface DetailMatePostType {
   gameAndCall: number;
 }
 
-const getAllMatePosts = async (matePostId: string) => {
+const getDetailMatePosts = async (matePostId: string) => {
   const response = await request<DetailMatePostType>(`/mate-posts/${matePostId}`);
   return response.data;
 };
@@ -36,11 +36,10 @@ const getAllMatePosts = async (matePostId: string) => {
 const useGetDetailMatePost = (matePostId: string) => {
   const { data, isError } = useQuery({
     queryKey: [QUERY_KEYS.matePost, matePostId],
-    queryFn: () => getAllMatePosts(matePostId),
+    queryFn: () => getDetailMatePosts(matePostId),
   });
 
   if (isError) {
-    // throw new Error("Error while fetching mate detail data");
     console.log("Error while fetching mate detail data");
   }
 

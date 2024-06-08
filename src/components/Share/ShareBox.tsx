@@ -13,6 +13,7 @@ interface ShareBoxProps {
   counts: number;
   price: number;
   link: string;
+  num: number;
 }
 
 const CATEGORY: { [key: string]: string } = {
@@ -49,7 +50,9 @@ function ShareBox(props: ShareBoxProps) {
       <div css={styles.bottom_info}>
         <div css={styles.left}>
           <p className="title">{props.title}</p>
-          <p className="people">? / {props.counts}</p>
+          <p className="people">
+            {props.num} / {props.counts}
+          </p>
         </div>
         <div css={styles.right}>
           <p className="before_price">{props.price}원</p>

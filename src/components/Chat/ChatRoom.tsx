@@ -21,7 +21,7 @@ interface ChatMessageResponse {
 }
 
 function ChatRoom() {
-  const { chatId } = useParams();
+  const { roomId } = useParams();
   const user = useAuth();
   const [stompClient, setStompClient] = useState<Client | null>(null);
   const [messages, setMessages] = useState<ChatMessageResponse[]>([]);
@@ -32,7 +32,7 @@ function ChatRoom() {
   useEffect(() => {
     const loadChatHistory = async () => {
       try {
-        const response = await request(`/api/v1/rooms/${chatId}/messages`);
+        const response = await request(`/api/v1/rooms/${roomId}/messages`);
         console.log("chat history", response);
         const messages = response.data as ChatMessageResponse[];
         setMessages(messages);
@@ -47,7 +47,7 @@ function ChatRoom() {
       brokerURL: "ws://43.203.234.191/chat", // 서버 WebSocket URL
       reconnectDelay: 5000,
       onConnect: () => {
-        client.subscribe(`/topic/public/rooms/${chatId}`, (message: IMessage) => {
+        client.subscribe(`/topic/public/rooms/${roomId}`, (message: IMessage) => {
           const msg: ChatMessageResponse = JSON.parse(message.body);
           console.log(msg);
           console.log("prev", messages);
@@ -60,17 +60,17 @@ function ChatRoom() {
     return () => {
       client.deactivate();
     };
-  }, [chatId]);
+  }, [roomId]);
 
   const sendMessage = () => {
     if (stompClient && newMessage) {
       const chatMessage: ChatMessageReqeust = {
         from: user.name,
         text: newMessage,
-        roomId: parseInt(chatId || ""),
+        roomId: parseInt(roomId || ""),
       };
       stompClient.publish({
-        destination: `/app/chat/rooms/${chatId}/send`,
+        destination: `/app/chat/rooms/${roomId}/send`,
         body: JSON.stringify(chatMessage),
       });
       console.log(messages);
@@ -85,7 +85,7 @@ function ChatRoom() {
         <Messages mine user="202호" message="재료 뭐 원하세요?" />
         {messages.map((item, index) => (
           <Messages
-            key={index + item.id + "msg"}
+            key={roomId + index + item.writer}
             mine={item.writer === user.name}
             user={item.writer}
             message={item.content}

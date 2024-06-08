@@ -11,6 +11,8 @@ interface MateBoxProps {
   grade: string;
 }
 
+const GENDER = { female: "여자", male: "남자" };
+
 function MateBox(props: MateBoxProps) {
   //TODO: 데이터 prop으로 받음
 
@@ -19,7 +21,7 @@ function MateBox(props: MateBoxProps) {
       <div css={styles.info}>
         <img src={user_icon} alt="profile" width={21} />
         <p className="info">
-          만 {props.age}세 | {props.gender} | {props.grade}
+          만 {props.age}세 | {GENDER[props.gender]}
         </p>
       </div>
       <div css={styles.title}>{props.title}</div>

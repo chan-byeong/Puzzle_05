@@ -6,6 +6,7 @@ import { SubmitBtn } from "./MateForm.style";
 import MateInfoCard from "./MateInfoCard";
 import DetailHeader from "../Common/Header/DetailHeader";
 import Modal from "../Common/Modal";
+import useGetDetailMatePost from "../../hooks/Mate/get/useGetDetailMatePost";
 
 function MateDetail() {
   const [view, setVeiw] = useState(0);
@@ -13,9 +14,10 @@ function MateDetail() {
 
   //TODO: uid로 글 정보 단건 조회
   const { matePostId } = useParams();
-  console.log(matePostId);
+  const data = useGetDetailMatePost(matePostId);
+  console.log(data);
 
-  const cards = [<MateInfoCard first />, <MateInfoCard />, <MateInfoCard />, <MateInfoCard />];
+  const cards = [<MateInfoCard first />, <MateInfoCard />, <MateInfoCard />];
 
   return (
     <>
@@ -45,7 +47,7 @@ function MateDetail() {
           메이트 신청하기
         </SubmitBtn>
       </div>
-      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} />
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} title="메이트 신청을 할까요?" />
     </>
   );
 }
@@ -54,7 +56,7 @@ export default MateDetail;
 const backColor = ["#E5E5E5", "#cacacaed", "#c0bebe"];
 const forwardColor = ["", "#98F0D6", "#C3F5E6", "#E5F7F2"];
 const fontColor = ["", "#3A3A3A", "#7A7A7A", "#BBB"];
-const txt = ["", "생활패턴", "예민도", "특성"];
+const txt = ["", "생활패턴", "특성"];
 
 const styles = {
   wrapper: (index: number, isFocused: boolean, isForward: boolean, view: number) => css`
