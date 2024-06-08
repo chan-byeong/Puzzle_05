@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint */
-// 역할, 트랙 select 스타일
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const numberStyle = {
   indicatorSeparator: () => ({
     backgroundColor: "transparent",
