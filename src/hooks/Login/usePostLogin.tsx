@@ -37,7 +37,7 @@ function usePostLogin() {
     mutationKey: ["user-login"],
     mutationFn: (data: LoginType) => requestLogin(data),
     onSuccess: (data) => {
-      if (data.status === 200) console.log(data);
+      if (data.status === 200) nav("/");
       else alert("로그인 실패: 학번,비번을 확인하세요");
     },
     onError: () => alert("로그인 에러!"),
