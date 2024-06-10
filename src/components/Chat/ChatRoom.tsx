@@ -80,7 +80,7 @@ function ChatRoom() {
 
   return (
     <>
-      <DetailHeader title="밤에 먹어도 죄책감 없는 마라탕" />
+      <DetailHeader title="채팅방" />
       <section css={styles.container}>
         {/* <Messages mine user="202호" message="재료 뭐 원하세요?" /> */}
         {messages.map((item, index) => (

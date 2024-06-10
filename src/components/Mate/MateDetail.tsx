@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { css } from "@emotion/react";
 
 import { SubmitBtn } from "./MateForm.style";
@@ -7,6 +7,7 @@ import MateInfoCard from "./MateInfoCard";
 import DetailHeader from "../Common/Header/DetailHeader";
 import Modal from "../Common/Modal";
 import useGetDetailMatePost from "../../hooks/Mate/get/useGetDetailMatePost";
+import useAddChatRoom from "../../hooks/Chat/useAddChatRoom";
 
 export interface DetailMatePostType {
   title: string;
@@ -33,6 +34,8 @@ function MateDetail() {
   const [view, setVeiw] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [apply, setApply] = useState(false);
+  const mutation = useAddChatRoom();
+  const nav = useNavigate();
 
   //TODO: uid로 글 정보 단건 조회
   const { matePostId } = useParams();
@@ -41,7 +44,10 @@ function MateDetail() {
   const cards = [<MateInfoCard first data={data} />, <MateInfoCard second data={data} />, <MateInfoCard data={data} />];
 
   useEffect(() => {
-    if (apply) console.log("request");
+    if (apply) {
+      mutation.mutate();
+      nav("/chat");
+    }
   }, [apply]);
 
   return (

@@ -13,10 +13,11 @@ function RoomMate() {
   // const [sort, setSort] = useState<string>("최신순");
 
   const matePosts = useGetAllMatePosts();
+  const reversedData = [...matePosts].reverse();
   return (
     <div>
       <Filtering />
-      {matePosts.map((item) => (
+      {reversedData.map((item) => (
         <div key={item.matePostId} onClick={() => nav(`${item.matePostId}`)}>
           <MateBox {...item} />
         </div>
