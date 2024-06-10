@@ -280,7 +280,15 @@ export const ViewDiet = styled(Box)`
 `;
 
 export const WeekMenu = styled(Box)`
-  height: 118px;
-
+  height: 122px;
   margin-top: 10px;
+
+  padding: 15px;
+
+  & > p {
+    font-weight: 400;
+    text-align: start;
+    line-height: normal;
+    padding: 2px 0px;
+  }
 `;

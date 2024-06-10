@@ -8,7 +8,7 @@ import Sorting from "../Common/Sorting";
 
 function Filtering() {
   const [filters, setfilters] = useState([]);
-  const [sort, setSort] = useState<string>("최신순");
+  const [sort, setSort] = useState<string>("과거순");
   const [modalOpen, setModalOpen] = useState(false);
 
   const deletefilter = (index: number) => {

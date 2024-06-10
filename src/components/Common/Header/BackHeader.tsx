@@ -11,7 +11,7 @@ function BackHeader({ title }: PostHeaderProps) {
   return (
     <H.HeaderBox style={{ paddingTop: "8px", marginBottom: "0px" }}>
       <H.Back onClick={() => nav("/")} />
-      <H.Title>{title}</H.Title>
+      <H.Title style={{ marginRight: "12px" }}>{title}</H.Title>
       <p></p>
     </H.HeaderBox>
   );

@@ -44,7 +44,7 @@ function ChatRoom() {
     loadChatHistory();
 
     const client = new Client({
-      brokerURL: "ws://43.203.234.191/chat", // 서버 WebSocket URL
+      brokerURL: "ws://15.165.19.171/chat", // 서버 WebSocket URL
       reconnectDelay: 5000,
       onConnect: () => {
         client.subscribe(`/topic/public/rooms/${roomId}`, (message: IMessage) => {
@@ -82,7 +82,7 @@ function ChatRoom() {
     <>
       <DetailHeader title="밤에 먹어도 죄책감 없는 마라탕" />
       <section css={styles.container}>
-        <Messages mine user="202호" message="재료 뭐 원하세요?" />
+        {/* <Messages mine user="202호" message="재료 뭐 원하세요?" /> */}
         {messages.map((item, index) => (
           <Messages
             key={roomId + index + item.writer}
