@@ -8,12 +8,12 @@ import ErrorPage from "../components/Common/ErrorPage";
 function HomePage() {
   return (
     <>
-      {/* <ErrorBoundary fallback={<ErrorPage />}> */}
-      <Suspense fallback={<Loader />}>
-        <Header />
-        <Home />
-      </Suspense>
-      {/* </ErrorBoundary> */}
+      <ErrorBoundary fallback={<ErrorPage />}>
+        <Suspense fallback={<Loader />}>
+          <Header />
+          <Home />
+        </Suspense>
+      </ErrorBoundary>
     </>
   );
 }

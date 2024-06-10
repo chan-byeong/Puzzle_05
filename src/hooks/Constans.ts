@@ -1,4 +1,4 @@
-export const BASE_URL = "http://43.203.234.191";
+export const BASE_URL = "http://15.165.19.171";
 
 export const QUERY_KEYS = {
   allMatePosts: "all-mate-posts",

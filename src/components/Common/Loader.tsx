@@ -23,7 +23,7 @@ const Container = styled.div`
   width: 100%;
   max-width: 390px;
   height: 100%;
-  min-height: 600px;
+  min-height: 800px;
 
   display: flex;
   justify-content: center;

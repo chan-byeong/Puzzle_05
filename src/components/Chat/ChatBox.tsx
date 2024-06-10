@@ -1,5 +1,6 @@
 import React from "react";
 import { css } from "@emotion/react";
+import msg_icon from "../Common/Header/images/message-circle.png";
 
 interface ChatBoxProps {
   roomId: string;
@@ -40,8 +41,12 @@ const styles = {
     width: 56px;
     height: 56px;
 
-    background-color: #eee;
+    background-color: transparent;
     margin-right: 12px;
+    background-image: url(${msg_icon});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
   `,
   title: css`
     color: #585858;
