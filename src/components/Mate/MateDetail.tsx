@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { css } from "@emotion/react";
 
@@ -8,16 +8,41 @@ import DetailHeader from "../Common/Header/DetailHeader";
 import Modal from "../Common/Modal";
 import useGetDetailMatePost from "../../hooks/Mate/get/useGetDetailMatePost";
 
+export interface DetailMatePostType {
+  title: string;
+  contents: string;
+  gender: string;
+  age: number;
+  mbti: string;
+  wakeUpStart: number;
+  wakeUpEnd: number;
+  sleepStart: number;
+  sleepEnd: number;
+  showerStart: number;
+  showerEnd: number;
+  dayOfWeek: string;
+  smoking: string;
+  deliveryFood: number;
+  gameAndCall: number;
+  homeProtector: number;
+  cleaning: number;
+  killBug: number;
+}
+
 function MateDetail() {
   const [view, setVeiw] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
+  const [apply, setApply] = useState(false);
 
   //TODO: uid로 글 정보 단건 조회
   const { matePostId } = useParams();
   const data = useGetDetailMatePost(matePostId);
-  console.log(data);
 
-  const cards = [<MateInfoCard first />, <MateInfoCard />, <MateInfoCard />];
+  const cards = [<MateInfoCard first data={data} />, <MateInfoCard second data={data} />, <MateInfoCard data={data} />];
+
+  useEffect(() => {
+    if (apply) console.log("request");
+  }, [apply]);
 
   return (
     <>
@@ -47,7 +72,7 @@ function MateDetail() {
           메이트 신청하기
         </SubmitBtn>
       </div>
-      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} title="메이트 신청을 할까요?" />
+      <Modal isOpen={modalOpen} setIsOpen={setModalOpen} setApply={setApply} title="메이트 신청을 할까요?" />
     </>
   );
 }
@@ -61,8 +86,14 @@ const txt = ["", "생활패턴", "특성"];
 const styles = {
   wrapper: (index: number, isFocused: boolean, isForward: boolean, view: number) => css`
     position: absolute;
-    top: calc(${index}*60px);
-    z-index: ${isFocused ? 15 : isForward ? index : 4 - index};
+    /* top: calc(${index}*70px); */
+    top: ${index === 0 ? "10px" : index === 1 ? "115px" : "100px"}; // first
+    top: ${isFocused && index === 1 ? "65px" : index === 2 && view === 1 ? "50px" : ""}; //second
+    top: ${isFocused && index === 2 ? "90px" : index === 1 && view === 2 ? "55px" : ""}; //third
+
+    z-index: ${isFocused ? 15 : isForward ? index + 1 : 5 - index};
+
+    z-index: ${view === 1 && index === 2 && 0};
 
     /* top: ${isForward && index * 30}px; */
     /* top: ${isFocused && index * 30}px; */
@@ -81,7 +112,7 @@ const styles = {
         display: ${(isFocused || isForward) && "none"};
         content: "${txt[index]}";
         position: absolute;
-        bottom: 10px;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
 

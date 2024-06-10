@@ -9,25 +9,24 @@ import usePostMatePost from "../../hooks/Mate/post/usePostMatePost";
 import left_arrow from "./images/chevron-left-w.png";
 
 type FormData = {
-  age: string;
-  contents: string;
-  dayOfWeek: string;
-  deliveryFood: number;
-  familiarity: number;
-  gameAndCall: number;
-  gender: string;
-  homeProtector: number;
-  light: number;
-  mbti: string;
-  personalTime: number;
-  showerEnd: number;
-  showerStart: number;
-  sleepEnd: number;
-  sleepStart: number;
-  smoking: string;
   title: string;
-  wakeUpEnd: number;
+  contents: string;
+  gender: string;
+  age: number;
+  mbti: string;
   wakeUpStart: number;
+  wakeUpEnd: number;
+  sleepStart: number;
+  sleepEnd: number;
+  showerStart: number;
+  showerEnd: number;
+  dayOfWeek: string;
+  smoking: string;
+  deliveryFood: number;
+  gameAndCall: number;
+  homeProtector: number;
+  cleaning: number;
+  killBug: number;
 };
 
 const MBTI = [
@@ -50,11 +49,11 @@ const MBTI = [
 ];
 const WEEK = ["월", "화", "수", "목", "금", "토", "일"];
 
-const DELIVERY = ["안 먹음", "일주일 1번 이하", "일주일 2-3번", "일주일 4-5번", "매일"];
-const GAME = ["거의 안함", "일주일 1번 이하", "일주일 2-3번", "일주일 4-5번", "매일"];
-const TIDYUP = ["바닥에 던져둠", "필요할 때만", "가끔 어지러운 편", "정해진 위치에만", "언제나 각잡히게"];
-const CLEANING = [" 전혀 안함", "더러우면 가끔", "일주일에 2-3번", "일주일에 4-5번", "매일"];
-const BUG = ["아예 못 잡음", "  초소형벌레 가능", "  중형 벌레 가능", "  바퀴벌레 가능", "  벌레와 친함"];
+export const DELIVERY = ["안 먹음", "일주일 1번 이하", "일주일 2-3번", "일주일 4-5번", "매일"];
+export const GAME = ["거의 안함", "일주일 1번 이하", "일주일 2-3번", "일주일 4-5번", "매일"];
+export const TIDYUP = ["바닥에 던져둠", "필요할 때만", "가끔 어지러운 편", "정해진 위치에만", "언제나 각잡히게"];
+export const CLEANING = [" 전혀 안함", "더러우면 가끔", "일주일에 2-3번", "일주일에 4-5번", "매일"];
+export const BUG = ["아예 못 잡음", "  초소형벌레 가능", "  중형 벌레 가능", "  바퀴벌레 가능", "  벌레와 친함"];
 // const delivery = [""]
 
 interface MateFormProps {

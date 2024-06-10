@@ -1,7 +1,8 @@
 import React from "react";
 import { css } from "@emotion/react";
 
-import temp_food from "./image/IMG_3203.jpeg";
+import food_icon from "./image/Pizza_light.png";
+import package_icon from "./image/package_car.png";
 import user_icon from "./image/users.png";
 
 interface ShareBoxProps {
@@ -22,7 +23,6 @@ const CATEGORY: { [key: string]: string } = {
 };
 
 const dateConverter = (date: string) => {
-  console.log(date);
   const today = new Date();
   const todayString = `${today.getMonth() + 1}월 ${today.getDate()}일(${today.toLocaleDateString("ko-KR", {
     weekday: "short",
@@ -31,7 +31,6 @@ const dateConverter = (date: string) => {
   else {
     const regex = /(\d{1,2})월 (\d{1,2})일/;
     const matches = date.match(regex);
-    console.log(matches);
     return matches !== null && `${matches[1]}/${matches[2]}`;
   }
 };
@@ -42,11 +41,13 @@ function ShareBox(props: ShareBoxProps) {
   const endDay = dateConverter(props.endDay);
   const endDate = `${endDay} ${props.endTime} 까지`;
 
+  const icon = props.category === "delivery" ? food_icon : package_icon;
+
   return (
     <div css={styles.container}>
       <div css={styles.time_tag}>{endDate}</div>
       <div css={styles.type_tag}>{CATEGORY[props.category]}</div>
-      <div css={styles.thumbnail(temp_food)}></div>
+      <div css={styles.thumbnail(icon)}></div>
       <div css={styles.bottom_info}>
         <div css={styles.left}>
           <p className="title">{props.title}</p>

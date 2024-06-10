@@ -4,25 +4,24 @@ import request from "../../api";
 import { QUERY_KEYS } from "../../Constans";
 
 type FormData = {
-  age: string;
-  contents: string;
-  dayOfWeek: string;
-  deliveryFood: number;
-  familiarity: number;
-  gameAndCall: number;
-  gender: string;
-  homeProtector: number;
-  light: number;
-  mbti: string;
-  personalTime: number;
-  showerEnd: number;
-  showerStart: number;
-  sleepEnd: number;
-  sleepStart: number;
-  smoking: string;
   title: string;
-  wakeUpEnd: number;
+  contents: string;
+  gender: string;
+  age: number;
+  mbti: string;
   wakeUpStart: number;
+  wakeUpEnd: number;
+  sleepStart: number;
+  sleepEnd: number;
+  showerStart: number;
+  showerEnd: number;
+  dayOfWeek: string;
+  smoking: string;
+  deliveryFood: number;
+  gameAndCall: number;
+  homeProtector: number;
+  cleaning: number;
+  killBug: number;
 };
 
 function usePostMatePost() {

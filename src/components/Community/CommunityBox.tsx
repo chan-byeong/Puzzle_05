@@ -1,36 +1,21 @@
+import React from "react";
 import { css } from "@emotion/react";
+import user_icon from "../Mate/images/user-icon.png";
 
-import user_icon from "./images/user-icon.png";
-
-interface MateBoxProps {
-  matePostId: number;
-  title: string;
-  contents: string;
-  age: number;
-  gender: string;
-  grade: string;
-}
-
-const GENDER = { female: "여자", male: "남자" };
-
-function MateBox(props: MateBoxProps) {
-  //TODO: 데이터 prop으로 받음
-
+function CommunityBox() {
   return (
     <div css={styles.container}>
       <div css={styles.info}>
         <img src={user_icon} alt="profile" width={21} />
-        <p className="info">
-          만 {props.age}세 | {GENDER[props.gender]} | {props.grade} 학년
-        </p>
+        <p className="info">익명</p>
       </div>
-      <div css={styles.title}>{props.title}</div>
-      <div css={styles.description}>{props.contents}</div>
+      <div css={styles.title}>기숙사</div>
+      <div css={styles.description}>팔아요</div>
     </div>
   );
 }
 
-export default MateBox;
+export default CommunityBox;
 
 const styles = {
   container: css`

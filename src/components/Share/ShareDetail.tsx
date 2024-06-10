@@ -3,6 +3,8 @@ import { css } from "@emotion/react";
 
 import * as S from "./Share.style";
 import useApplyShare from "../../hooks/Share/useApplyShare";
+import useAddChatRoom from "../../hooks/Chat/useAddChatRoom";
+import useAuth from "../../hooks/Login/useAuth";
 
 interface ShareDetailProps {
   buyPostId: number;
@@ -31,7 +33,6 @@ const dateConverter = (date: string) => {
   else {
     const regex = /(\d{1,2})월 (\d{1,2})일/;
     const matches = date.match(regex);
-    console.log(matches);
     return matches !== null && `${matches[1]}/${matches[2]}`;
   }
 };
@@ -40,25 +41,28 @@ function ShareDetail(props: ShareDetailProps) {
   const endDay = dateConverter(props.endDay);
   const endDate = `${endDay} ${props.endTime} 까지`;
   const mutation = useApplyShare(props.buyPostId);
+  const addChatRoom = useAddChatRoom();
+  const auth = useAuth();
 
   const handleModal = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
     setTimeout(() => {
       props.modalSetter(null); // 비동기적으로 상태 변경
     }, 0);
-    console.log("shadow Clicked");
   };
 
   const onClickApply = () => {
-    mutation.mutate();
+    mutation.mutate(); // invalidate all-share-posts query
     setTimeout(() => {
       props.modalSetter(null); // 비동기적으로 상태 변경
     }, 500);
+
+    addChatRoom.mutate(); // navigate to share chat room
+    // navigate to chatRoom - chat/:roomId
   };
 
   const onClickContainer = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
-    console.log("container");
   };
 
   return (
@@ -67,7 +71,7 @@ function ShareDetail(props: ShareDetailProps) {
       <S.Container onClick={onClickContainer}>
         <div css={styles.wrapper}>
           <S.Profile />
-          <S.Text>202호</S.Text>
+          <S.Text>{auth.roomNum}</S.Text>
         </div>
 
         <div css={styles.wrapper}>
@@ -82,7 +86,7 @@ function ShareDetail(props: ShareDetailProps) {
           <div css={css`margin-left: 22px;`}>
               <div css={styles.wrapper}>
                 <S.MapPin />
-                <S.Text>춘리마라탕</S.Text>
+                <S.Text>가게명</S.Text>
                 <S.More/>
               </div>
               <div css={styles.wrapper}>
@@ -104,7 +108,7 @@ function ShareDetail(props: ShareDetailProps) {
             </div>
         </div>
 
-        <S.Btn css={styles.top_margin} onClick={onClickApply}>
+        <S.Btn css={styles.top_margin} onClick={onClickApply} disabled={props.num >= props.counts}>
           공동구매 신청하기
         </S.Btn>
       </S.Container>

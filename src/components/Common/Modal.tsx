@@ -5,11 +5,12 @@ interface ModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
-  function?: boolean;
+  setApply?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Modal({ isOpen, setIsOpen, title }: ModalProps) {
-  const handleModal = () => {
+function Modal({ isOpen, setIsOpen, title, setApply }: ModalProps) {
+  const handleModal = (e) => {
+    e.target.innerText === "네" ? setApply(true) : setApply(false);
     setIsOpen((pre) => !pre);
   };
 

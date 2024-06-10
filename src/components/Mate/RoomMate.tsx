@@ -10,6 +10,7 @@ function RoomMate() {
   const nav = useNavigate();
   //TODO: 데이터 로드
   //TODO: 데이터 필터링 후 리렌더링 -> 필터 선택 상태 관리
+  // const [sort, setSort] = useState<string>("최신순");
 
   const matePosts = useGetAllMatePosts();
   return (

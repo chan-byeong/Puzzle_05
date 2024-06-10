@@ -6,9 +6,10 @@ import useAuth from "../../../hooks/Login/useAuth";
 function Header() {
   const nav = useNavigate();
   const auth = useAuth();
+  console.log(auth);
 
   const handleOnClick = (routes: string) => {
-    if (auth === undefined) nav("/login");
+    if (auth === undefined || auth.email === 0) nav("/login");
     else nav(routes);
   };
 

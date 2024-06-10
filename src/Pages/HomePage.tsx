@@ -1,12 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import Header from "../components/Common/Header/Header";
 import Home from "../components/Home/Home";
+import Loader from "../components/Common/Loader";
+import ErrorBoundary from "../components/Common/ErrorBoundary";
+import ErrorPage from "../components/Common/ErrorPage";
 function HomePage() {
   return (
     <>
-      <Header />
-      <Home />
+      {/* <ErrorBoundary fallback={<ErrorPage />}> */}
+      <Suspense fallback={<Loader />}>
+        <Header />
+        <Home />
+      </Suspense>
+      {/* </ErrorBoundary> */}
     </>
   );
 }

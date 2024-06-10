@@ -25,7 +25,7 @@ const useGetAllMatePosts = () => {
     console.log("data is undefined");
   }
 
-  return data;
+  return data.reverse();
 };
 
 export default useGetAllMatePosts;

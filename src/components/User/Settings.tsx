@@ -1,7 +1,19 @@
 import React from "react";
 import { css } from "@emotion/react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 function Settings() {
+  const queryClient = useQueryClient();
+  const nav = useNavigate();
+
+  const onClickLogOut = () => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+    nav("/");
+  };
+
   return (
     <div>
       <section css={styles.container}>
@@ -13,7 +25,9 @@ function Settings() {
       <section css={styles.container2}>
         <p css={styles.menu}>설치버전</p>
         <p css={styles.menu}>비밀번호 변경</p>
-        <p css={styles.menu}>로그아웃</p>
+        <p css={styles.menu} onClick={onClickLogOut}>
+          로그아웃
+        </p>
       </section>
     </div>
   );

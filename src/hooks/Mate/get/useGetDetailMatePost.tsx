@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 import request from "../../api";
 import { QUERY_KEYS } from "../../Constans";
@@ -16,16 +16,12 @@ interface DetailMatePostType {
   showerStart: number;
   showerEnd: number;
   dayOfWeek: string;
-  snoring: string;
-  noiseSense: number;
-  light: number;
-  noisiness: number;
   smoking: string;
-  personalTime: number;
-  familiarity: number;
   deliveryFood: number;
-  homeProtector: number;
   gameAndCall: number;
+  homeProtector: number;
+  cleaning: number;
+  killBug: number;
 }
 
 const getDetailMatePosts = async (matePostId: string) => {
@@ -34,7 +30,7 @@ const getDetailMatePosts = async (matePostId: string) => {
 };
 
 const useGetDetailMatePost = (matePostId: string) => {
-  const { data, isError } = useQuery({
+  const { data, isError } = useSuspenseQuery({
     queryKey: [QUERY_KEYS.matePost, matePostId],
     queryFn: () => getDetailMatePosts(matePostId),
   });
