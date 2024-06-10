@@ -11,6 +11,7 @@ function Share() {
   const [detailModal, setDetailModal] = useState<number | null>(null);
 
   const sharePosts = useGetAllSharePosts();
+  const reversedData = [...sharePosts].reverse();
   console.log(sharePosts);
   // 모달 열렸을 시 스크롤 방지
   useEffect(() => {
@@ -29,7 +30,7 @@ function Share() {
     <div>
       <Filtering />
       <div style={{ marginTop: "10px" }}>
-        {sharePosts.map((item, index) => (
+        {reversedData.map((item, index) => (
           <section key={item.buyPostId} onClick={() => setDetailModal(index)}>
             <ShareBox {...item} />
             {detailModal === index && <ShareDetail {...item} modalSetter={setDetailModal} />}
