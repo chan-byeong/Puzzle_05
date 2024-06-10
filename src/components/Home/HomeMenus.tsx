@@ -6,7 +6,7 @@ import useLoadHomeDatas, { MealType, NoticeType } from "../../hooks/Home/useLoad
 
 function HomeMenus() {
   const nav = useNavigate();
-  // const notice = useLoadHomeDatas("notice") as NoticeType[];
+  const notice = useLoadHomeDatas("notice") as NoticeType[];
 
   return (
     <>
@@ -24,9 +24,9 @@ function HomeMenus() {
       <H.HomeBox onClick={() => nav("/community/announcement")}>
         <div>공지사항</div>
         <H.AnnounceBox>
-          {/* {notice.map((item, index) => (
+          {notice.map((item, index) => (
             <p key={index}>{item.title}</p>
-          ))} */}
+          ))}
         </H.AnnounceBox>
       </H.HomeBox>
     </>
