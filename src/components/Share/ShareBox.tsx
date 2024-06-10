@@ -128,6 +128,8 @@ const styles = {
 
     background-image: url(${imgsrc});
     background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
   `,
 
   bottom_info: () => css`
