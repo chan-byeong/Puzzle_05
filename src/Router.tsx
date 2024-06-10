@@ -14,6 +14,9 @@ import SignupPage from "./Pages/SignupPage";
 import User from "./components/User/User";
 import ChatList from "./components/Chat/ChatList";
 import ChatRoom from "./components/Chat/ChatRoom";
+import { Suspense } from "react";
+import Loader from "./components/Common/Loader";
+import Community from "./components/Community/Community";
 
 const router = createBrowserRouter([
   {
@@ -70,7 +73,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "/community/bulletin",
-                element: <h1>자유게시판</h1>,
+                element: <Community />,
               },
             ],
           },
@@ -81,7 +84,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/community/mate/:matePostId",
-            element: <MateDetail />,
+            element: (
+              <Suspense fallback={<Loader />}>
+                <MateDetail />,
+              </Suspense>
+            ),
           },
           {
             path: "/community/share-post",

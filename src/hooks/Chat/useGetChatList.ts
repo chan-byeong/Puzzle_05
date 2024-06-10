@@ -17,7 +17,7 @@ const initialData = {
 };
 
 const requestChatList = async () => {
-  const response = await request<ChatRoomResponse>("/api/v1/rooms?size=5");
+  const response = await request<ChatRoomResponse>("/api/v1/rooms?size=10");
 
   return response.data;
 };

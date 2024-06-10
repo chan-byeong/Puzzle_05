@@ -157,4 +157,8 @@ export const Btn = styled.button`
   color: #fff;
   font-size: 16px;
   font-weight: 600;
+
+  &:disabled {
+    background-color: #d9d9d9;
+  }
 `;

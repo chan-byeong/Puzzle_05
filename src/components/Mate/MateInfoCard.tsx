@@ -2,13 +2,21 @@ import { css } from "@emotion/react";
 
 import user from "./images/big_user.png";
 import ProgressBar from "./ProgressBar";
+import { DetailMatePostType } from "./MateDetail";
+import { DELIVERY, BUG, GAME, TIDYUP, CLEANING } from "./MateForm";
 
 interface MateInfoCardProps {
   first?: boolean;
+  second?: boolean;
+  data: DetailMatePostType;
 }
 
+const GENDER = { female: "여자", male: "남자" };
+const SMOKING = { true: "O", false: "X" };
+
 //TODO: 상세 정보 props & 첫장인지 아닌지 구분
-function MateInfoCard({ first }: MateInfoCardProps) {
+
+function MateInfoCard({ first, data, second }: MateInfoCardProps) {
   const firstPage = (
     <div css={s.container}>
       <div css={s.userbox}>
@@ -23,19 +31,17 @@ function MateInfoCard({ first }: MateInfoCardProps) {
             left: 120px;
           `}
         >
-          <p css={s.major}>22학번 컴퓨터공학부</p>
+          <p css={s.major}>비공개</p>
           <p css={s.infos}>
-            만 21세 <span>|</span> 여자 <span>|</span> ISTJ
+            만 {data.age}세 <span>|</span> {GENDER[data.gender]} <span>|</span> {data.mbti}
           </p>
           <ProgressBar step={80} TOTAL={100} customWidth="130" customLeft="1" customTop="73" customHeigth="10" />
           <label css={s.label}>80</label>
         </div>
       </div>
       <div css={s.detailsWrapper}>
-        <div css={s.title}>룸메 구함</div>
-        <p css={s.description}>
-          안녕하세요 2024학년도 1학기 레이크홀 룸메 구합니다. 예민하지 않고 깨끗합니다. 같이 즐거운 한 학기 보내요~
-        </p>
+        <div css={s.title}>{data.title}</div>
+        <p css={s.description}>{data.contents}</p>
       </div>
     </div>
   );
@@ -46,25 +52,63 @@ function MateInfoCard({ first }: MateInfoCardProps) {
       <div css={s.detailsWrapper}>
         <p css={s.details}>
           <span className="left">기상시간</span>
-          <span className="right">10-11 시</span>
+          <span className="right">
+            {data.wakeUpStart}-{data.wakeUpEnd} 시
+          </span>
         </p>
         <p css={s.details}>
-          <span className="left">기상시간</span>
-          <span className="right">10-11 시</span>
+          <span className="left">취침시간</span>
+          <span className="right">
+            {data.sleepStart}-{data.sleepEnd} 시
+          </span>
         </p>
         <p css={s.details}>
-          <span className="left">기상시간</span>
-          <span className="right">10-11 시</span>
+          <span className="left">거주요일</span>
+          <span className="right">{data.dayOfWeek}</span>
         </p>
         <p css={s.details}>
-          <span className="left">기상시간</span>
-          <span className="right">10-11 시</span>
+          <span className="left">샤워시간</span>
+          <span className="right">
+            {data.showerStart}-{data.showerEnd} 시
+          </span>
         </p>
       </div>
     </div>
   );
 
-  return first ? firstPage : infoPage;
+  const infoPage2 = (
+    <div css={s.container}>
+      <div css={s.title_green}>특성</div>
+      <div css={s.detailsWrapper}>
+        <p css={s.details}>
+          <span className="left">흡연</span>
+          <span className="right">{SMOKING[data.smoking]}</span>
+        </p>
+        <p css={s.details}>
+          <span className="left">배달음식</span>
+          <span className="right">{DELIVERY[data.deliveryFood]}</span>
+        </p>
+        <p css={s.details}>
+          <span className="left">게임/통화</span>
+          <span className="right">{GAME[data.gameAndCall]}</span>
+        </p>
+        <p css={s.details}>
+          <span className="left">정리정돈</span>
+          <span className="right">{TIDYUP[data.homeProtector]}</span>
+        </p>
+        <p css={s.details}>
+          <span className="left">청소</span>
+          <span className="right">{CLEANING[data.cleaning]}</span>
+        </p>
+        <p css={s.details}>
+          <span className="left">벌레잡기</span>
+          <span className="right">{BUG[data.killBug]}</span>
+        </p>
+      </div>
+    </div>
+  );
+
+  return first ? firstPage : second ? infoPage : infoPage2;
 }
 
 export default MateInfoCard;
@@ -72,12 +116,12 @@ export default MateInfoCard;
 const s = {
   container: css`
     width: 358px;
-    height: 349px;
+    /* height: 349px; */
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     align-items: center;
-    padding: 20px 0;
+    padding: 40px 0;
 
     border-radius: 30px;
     background: #fff;
@@ -162,7 +206,7 @@ const s = {
 
   detailsWrapper: css`
     /* width: 200px; */
-    height: 180px;
+    /* height: 180px; */
     margin: 0 auto;
     /* display: flex;
     flex-direction: column;
@@ -183,23 +227,25 @@ const s = {
   `,
 
   details: css`
-    width: 140px;
+    /* width: 140px; */
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     text-align: center;
     margin-top: 20px;
-
+    gap: 30px;
     & > .left {
+      width: 82px;
       color: #3a3a3a;
       font-size: 15px;
       font-weight: 400;
       line-height: 24px; /* 160% */
+      text-align: end;
     }
 
     & > .right {
       color: #3a3a3a;
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 600;
       line-height: 24px; /* 160% */
     }
   `,

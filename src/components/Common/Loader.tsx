@@ -21,8 +21,9 @@ export default Loader;
 
 const Container = styled.div`
   width: 100%;
+  max-width: 390px;
   height: 100%;
-  min-height: 844px;
+  min-height: 600px;
 
   display: flex;
   justify-content: center;

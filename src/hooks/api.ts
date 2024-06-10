@@ -27,7 +27,7 @@ const request = async <T>(endpoint: string, options?: RequestInit): Promise<Resp
   if (!response.ok) {
     throw new Error(`Error occured ${response.status}, ${response.statusText}`);
   }
-  console.log(response);
+  // console.log(response);
 
   return response.json() as Promise<ResponseType<T>>;
 };

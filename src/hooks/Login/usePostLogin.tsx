@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { BASE_URL } from "../Constans";
@@ -33,12 +33,16 @@ const requestLogin = async (data: LoginType) => {
 
 function usePostLogin() {
   const nav = useNavigate();
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationKey: ["user-login"],
     mutationFn: (data: LoginType) => requestLogin(data),
     onSuccess: (data) => {
-      if (data.status === 200) nav("/");
-      else alert("로그인 실패: 학번,비번을 확인하세요");
+      if (data.status === 200) {
+        queryClient.invalidateQueries({ queryKey: ["user-profile"] });
+        nav("/");
+      } else alert("로그인 실패: 학번,비번을 확인하세요");
     },
     onError: () => alert("로그인 에러!"),
   });
